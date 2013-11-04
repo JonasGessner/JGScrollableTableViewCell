@@ -7,9 +7,9 @@ JGScrollableTableViewCell is a simple and easy to use UITableViewCell subclass w
 
 ##Requirements
 
-• iOS 5 or higher<p>
-• Built with <b>ARC</b> (If your Xcode project doesn't use ARC then set the `-fobjc-arc` compiler flag)<p>
-• Foundation, UIKit and CoreGraphics frameworks<p>
+• iOS 5 or higher<br>
+• Built with <b>ARC</b> (If your Xcode project doesn't use ARC then set the `-fobjc-arc` compiler flag)br>
+• Foundation, UIKit and CoreGraphics frameworks<br>
 
 
 ##Getting started
@@ -30,18 +30,21 @@ By default `JGScrollableTableViewCell` has an empty scroll area, and no option v
 - (void)setScrollViewInsets:(UIEdgeInsets)scrollViewInsets;
 ```
 Insets the scroll view. Useful for displaying a border around the scroll area (when also setting `contentView.backgroundColor`)
-<p>
+<br>
+<br>
 
 ```objc
 - (void)setScrollViewBackgroundColor:(UIColor *)scrollViewBackgroundColor;
 ```
 Sets the background color of the scroll view. Equivalent to `contentView.backgroundColor` on a regular `UITableViewCell`.
 <br>
+<br>
 
 ```objc
 - (BOOL)scrolling;
 ```
 Returns `YES`if the cell is being scrolled by the user.
+<br>
 <br>
 
 ####The option view
@@ -50,7 +53,8 @@ Returns `YES`if the cell is being scrolled by the user.
 - (void)setOptionView:(UIView *)view side:(JGScrollableTableViewCellSide)side;
 ```
 Sets a new option view & removes the old option view. `side` is the side on which the option view will appear (left or right).
-The option view will be dynamically resized to fit the cell's contents and the scroll view's insets. The only parameter that is not changed is the view's width. The width should be set before passing the view to this method.
+The option view will be dynamically resized to fit the cell's size and the scroll view's insets. The only parameter that is not changed is the view's width. The width should be set before passing the view to this method and will always stay the same.
+<br>
 <br>
 
 ```objc
@@ -58,11 +62,13 @@ The option view will be dynamically resized to fit the cell's contents and the s
 ```
 Returns the current option view.
 <br>
+<br>
 
 ```objc
 - (void)setOptionViewVisible:(BOOL)optionViewVisible animated:(BOOL)animated;
 ```
 Opens or closes the option view with an optional 0.3 second animation.
+<br>
 <br>
 
 ####Scrollable content
@@ -72,12 +78,14 @@ Opens or closes the option view with an optional 0.3 second animation.
 ```
 You should at no point add a view to the cell's directly or to its `contentView`. Instead, pass views that should be displayed on the cell to this method. Views passed to this method will appear in the scrollable area of the cell.
 <br>
+<br>
 
 ###Delegation
 `JGScrollableTableViewCell` has a delegate that conforms to the `JGScrollableTableViewCellDelegate` protocol. It is used for handling scroll events.
 ```objc
 @property (nonatomic, weak) id <JGScrollableTableViewCellDelegate> scrollDelegate;
 ```
+<br>
 <br>
 
 The `JGScrollableTableViewCellDelegate` protocol declares three optional (self explaining) methods:
@@ -88,6 +96,7 @@ The `JGScrollableTableViewCellDelegate` protocol declares three optional (self e
 ```
 Ideally, your `UITableViewDelegate` should also be your `JGScrollableTableViewCellDelegate`.
 <br>
+<br>
 
 ##Advanced usage
 
@@ -96,7 +105,7 @@ Ideally, your `UITableViewDelegate` should also be your `JGScrollableTableViewCe
 JGScrollableTableViewCellManager
 + (void)closeAllCellsWithExceptionOf:(JGScrollableTableViewCell *)cell stopAfterFirst:(BOOL)stop;
 ```
-This closes all option views in the table view that contains `cell`. `stop` flag that can increase performance by stopping the enumeration of cells after the first cell with an opened option view has been found. Set this flag to `YES` when you have set up the `JGScrollableTableViewCellDelegate` to only allow one opened option view at a time.
+This closes all option views in the table view that contains `cell`. `stop` is a flag that can increase performance by stopping the enumeration of cells after the first cell with an opened option view has been found and closed. Set this flag to `YES` when you have set up a `JGScrollableTableViewCellDelegate` to only allow one opened option view at a time (like in the following example).
 <br>
 
 Using this method call we can set up our table view to only allow one option view to be opened at at time:
@@ -133,8 +142,9 @@ Because `UITableView` reuses cells it is important to set the opened state of ea
 ```
 (`_openedIndexPath` is an instance variable)
 <br>
+<br>
 
-The `tableView:cellForRowAtIndexPath:` method should contain this code:
+The `tableView:cellForRowAtIndexPath:` method should contain this code to update each cell's `optionViewVisible` state:
 
 ```objc
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -147,6 +157,7 @@ The `tableView:cellForRowAtIndexPath:` method should contain this code:
     return cell;
 }
 ```
+<br>
 <br>
 
 ##Examples
