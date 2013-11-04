@@ -8,7 +8,7 @@ JGScrollableTableViewCell is a simple and easy to use UITableViewCell subclass w
 ##Requirements
 
 • iOS 5 or higher<br>
-• Built with <b>ARC</b> (If your Xcode project doesn't use ARC then set the `-fobjc-arc` compiler flag)br>
+• Built with <b>ARC</b> (If your Xcode project doesn't use ARC then set the `-fobjc-arc` compiler flag)<br>
 • Foundation, UIKit and CoreGraphics frameworks<br>
 
 
