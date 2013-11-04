@@ -19,14 +19,20 @@
 
 @end
 
+
 typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
     JGScrollableTableViewCellSideLeft = NO,
     JGScrollableTableViewCellSideRight = YES
 };
 
+/**
+ Cell with scrollable content and an option view that is revealed when scrolling on the cell.
+ */
 @interface JGScrollableTableViewCell : UITableViewCell
 
-//scroll view peoperties
+
+//Scroll view properties
+
 /**
  Insets the scroll view. Useful for displaying a border around the scroll area (when also setting \c contentView.backgroundColor)
  */
@@ -52,10 +58,11 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
 @property (nonatomic, assign, readonly) BOOL scrolling;
 
 
-//opened sides
+
+//Opened sides
+
 /**
- The current state of the option view.
- @return If the option view is visible.
+ @return The current visible state of the option view.
  */
 @property (nonatomic, assign) BOOL optionViewVisible;
 
@@ -66,8 +73,11 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
 - (void)setOptionViewVisible:(BOOL)optionViewVisible animated:(BOOL)animated;
 
 
-//views
+
+//Views
+
 /**
+ The option view is set with the \c setOptionView:side: method.
  @return The option view.
  */
 @property (nonatomic, strong, readonly) UIView *optionView;
@@ -82,7 +92,7 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
 
 
 /**
- Add a view to the scrolling area of the cell.
+ Adds a view to the scrolling area of the cell.
  @param view The view to add.
  */
 - (void)addContentView:(UIView *)view;
@@ -90,10 +100,15 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
 @end
 
 
+
+
+/**
+ Manage the state of all \c JGScrollableTableViewCells in a \c UITableView
+ */
 @interface JGScrollableTableViewCellManager : NSObject
 
 /**
- Closes all optin views in \c Cell's UITableView.
+ Closes all option views in the \c UITableView containing \c cell.
  @param cell The cell that should not be closed.
  */
 + (void)closeAllCellsWithExceptionOf:(JGScrollableTableViewCell *)cell;

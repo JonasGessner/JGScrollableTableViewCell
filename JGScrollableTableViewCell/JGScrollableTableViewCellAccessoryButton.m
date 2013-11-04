@@ -26,11 +26,13 @@
 }
 
 - (void)setButtonColor:(UIColor *)buttonColor forState:(UIControlState)state {
-    UIGraphicsBeginImageContextWithOptions((CGSize){1.0f, 1.0f}, YES, 0.0f);
+    CGSize size = (CGSize){1.0f, 1.0f};
+    
+    UIGraphicsBeginImageContextWithOptions(size, YES, 0.0f);
     
     [buttonColor setFill];
     
-    [[UIBezierPath bezierPathWithRect:(CGRect){CGPointZero, {1.0f, 1.0f}}] fill];
+    [[UIBezierPath bezierPathWithRect:(CGRect){CGPointZero, size}] fill];
     
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     

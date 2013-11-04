@@ -129,10 +129,13 @@ static NSMutableDictionary *_refs;
 @end
 
 
+#define kJGScrollableTableViewCellAnimationDuration 0.3
+
 @interface JGScrollableTableViewCell () <JGTouchForwarder, UIScrollViewDelegate> {
     JGScrollableTableViewCellScrollView *_scrollView;
     UIView *_scrollViewCoverView;
     JGScrollableTableViewCellSide _side;
+    BOOL _forceRelayout;
     
     __weak UITableView *_hostingTableView;
 }
@@ -165,19 +168,36 @@ static NSMutableDictionary *_refs;
 #pragma mark - Delegates
 
 - (void)forwardTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self touchesBegan:touches withEvent:event];
+    if (!self.scrolling && !self.optionViewVisible) {
+        [self touchesBegan:touches withEvent:event];
+    }
 }
 
 - (void)forwardTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self touchesCancelled:touches withEvent:event];
+    if (!self.scrolling && !self.optionViewVisible) {
+        [self touchesCancelled:touches withEvent:event];
+    }
 }
 
 - (void)forwardTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self touchesEnded:touches withEvent:event];
+    if (!self.scrolling && !self.optionViewVisible) {
+        [self touchesEnded:touches withEvent:event];
+    }
+    else if (self.optionViewVisible) {
+        __weak __typeof(self) weakSelf = self;
+        
+        [self setOptionViewVisible:NO animationDuration:kJGScrollableTableViewCellAnimationDuration completion:^{
+            if ([weakSelf.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
+                [weakSelf.scrollDelegate cellDidEndScrolling:weakSelf];
+            }
+        }];
+    }
 }
 
 - (void)forwardTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self touchesCancelled:touches withEvent:event];
+    if (!self.scrolling && !self.optionViewVisible) {
+        [self touchesCancelled:touches withEvent:event];
+    }
 }
 
 
@@ -220,13 +240,13 @@ static NSMutableDictionary *_refs;
     
     CGRect scrollViewFrame = UIEdgeInsetsInsetRect(self.contentView.bounds, self.scrollViewInsets);
     
+    _scrollView.delegate = nil;
+    
     _scrollView.frame = scrollViewFrame;
     
-    _scrollView.contentSize = (CGSize){scrollViewFrame.size.width+self.optionView.frame.size.width, scrollViewFrame.size.height};
+    _scrollView.delegate = self;
     
-    _scrolling = YES; //enusres that next call is actually executed
-    [self setOptionViewVisible:self.optionViewVisible]; //sets correct contentOffset
-    _scrolling = NO;
+    _scrollView.contentSize = (CGSize){scrollViewFrame.size.width+self.optionView.frame.size.width, scrollViewFrame.size.height};
     
     _scrollViewCoverView.frame = (CGRect){{(_side == JGScrollableTableViewCellSideLeft ? self.optionView.frame.size.width : 0.0f), 0.0f}, scrollViewFrame.size};
     
@@ -240,12 +260,20 @@ static NSMutableDictionary *_refs;
         
         self.optionView.frame = (CGRect){{self.scrollViewInsets.left, self.scrollViewInsets.top}, size};
     }
+    
+    _forceRelayout = YES; //enusres that next call is actually executed
+    [self setOptionViewVisible:self.optionViewVisible]; //sets correct contentOffset
+    _forceRelayout = NO;
 }
 
 #pragma mark - Setters
 
 - (void)setOptionViewVisible:(BOOL)optionViewVisible animated:(BOOL)animated {
-    if (_optionViewVisible == optionViewVisible && !self.scrolling) {
+    [self setOptionViewVisible:optionViewVisible animationDuration:(animated ? kJGScrollableTableViewCellAnimationDuration : 0.0) completion:NULL];
+}
+
+- (void)setOptionViewVisible:(BOOL)optionViewVisible animationDuration:(NSTimeInterval)duration completion:(void (^)(void))completion {
+    if (!_forceRelayout && _optionViewVisible == optionViewVisible && !self.scrolling) {
         return;
     }
     
@@ -263,12 +291,15 @@ static NSMutableDictionary *_refs;
         scrollDestination = (CGPoint){(_optionViewVisible ? _scrollView.contentSize.width-1.0f : 0.0f), 0.0f};
     }
     
-    [UIView animateWithDuration:(animated ? 0.3 : 0.0) delay:0.0 options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:duration delay:0.0 options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
         [_scrollView.panGestureRecognizer setEnabled:NO];
         [_scrollView scrollRectToVisible:(CGRect){scrollDestination, {1.0f, 1.0f}} animated:NO];
     } completion:^(__unused BOOL finished) {
         [_scrollView.panGestureRecognizer setEnabled:YES];
         _scrollView.delegate = self;
+        if (completion) {
+            completion();
+        }
     }];
 }
 
@@ -305,23 +336,27 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    [super setHighlighted:highlighted animated:animated];
     _optionView.hidden = highlighted;
+    _scrollView.scrollEnabled = !highlighted;
+    [super setHighlighted:highlighted animated:animated];
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
-    [super setHighlighted:highlighted];
     _optionView.hidden = highlighted;
+    _scrollView.scrollEnabled = !highlighted;
+    [super setHighlighted:highlighted];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
     _optionView.hidden = selected;
+    _scrollView.scrollEnabled = !selected;
+    [super setSelected:selected animated:animated];
 }
 
 - (void)setSelected:(BOOL)selected {
-    [super setSelected:selected];
     _optionView.hidden = selected;
+    _scrollView.scrollEnabled = !selected;
+    [super setSelected:selected];
 }
 
 #pragma mark - Dealloc

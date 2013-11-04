@@ -18,7 +18,9 @@
     
     self.mainViewController = [[JGTextViewController alloc] initWithStyle:UITableViewStylePlain];
     
-    self.window.rootViewController = self.mainViewController;
+    self.mainNavigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
+    
+    self.window.rootViewController = self.mainNavigationController;
     
     [self.window makeKeyAndVisible];
     

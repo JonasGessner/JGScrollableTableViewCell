@@ -15,5 +15,6 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (nonatomic, strong) JGTextViewController *mainViewController;
+@property (nonatomic, strong) UINavigationController *mainNavigationController;
 
 @end
