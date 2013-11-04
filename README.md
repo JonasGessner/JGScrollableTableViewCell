@@ -14,9 +14,9 @@ JGScrollableTableViewCell is a simple and easy to use UITableViewCell subclass w
 
 ##Getting started
 
-`JGScrollableTableViewCell` works just like any other `UITableViewCell`: Highlighting, selection, and `UITableViewDelegate` calls all work like usual. The only difference is that the cell's `contentView` is covered by a `UIScrollView` which basically becomes the new content view – which is scrollable.
+`JGScrollableTableViewCell` works just like any other `UITableViewCell`: Highlighting, selection, and `UITableViewDelegate` calls all work like normal. The only difference is that the cell's `contentView` is covered by a `UIScrollView` that basically becomes the new content view – which is scrollable.
 
-An "option view" can be assigned to the cell, which effectively places that view behind the scroll view, making it possible to scroll on the cell to reveal the option view behind it. This option view can be displayed on the right side of the cell or on the left side of the cell.
+An "option view" can be assigned to the cell, which is placed behind the scroll view, making it possible to scroll on the cell to reveal the option view behind it. This option view can be displayed on the right side of the cell or on the left side of the cell.
 
 <b>Note:</b> You should always use custom subclasses of `JGScrollableTableViewCell` that add your custom content to the cell (ex labels & image views).
 
@@ -30,7 +30,7 @@ By default `JGScrollableTableViewCell` has an empty scroll area, and no option v
 - (void)setScrollViewInsets:(UIEdgeInsets)scrollViewInsets;
 ```
 Insets the scroll view. Useful for displaying a border around the scroll area (when also setting `contentView.backgroundColor`)
-<br>
+<p>
 
 ```objc
 - (void)setScrollViewBackgroundColor:(UIColor *)scrollViewBackgroundColor;
