@@ -84,7 +84,7 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
 
 
 /**
- Sets & removes the old option view.
+ Sets a new option view & removes the old option view.
  @param view The option view to add. The view's width should be set, all ofther frame paramaters are ignored.
  @param side The side on which the view should be placed. Either left or right.
  */
@@ -110,7 +110,8 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
 /**
  Closes all option views in the \c UITableView containing \c cell.
  @param cell The cell that should not be closed.
+ @param stop A flag that can increase performance by stopping the enumeration of cells after the first cell with an opened option view has been found. Set this flag to \c YES when you have set up the \c JGScrollableTableViewCellDelegate to only allow one opened option view at a time.
  */
-+ (void)closeAllCellsWithExceptionOf:(JGScrollableTableViewCell *)cell;
++ (void)closeAllCellsWithExceptionOf:(JGScrollableTableViewCell *)cell stopAfterFirst:(BOOL)stop;
 
 @end

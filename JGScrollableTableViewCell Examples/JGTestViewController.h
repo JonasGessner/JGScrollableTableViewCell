@@ -1,5 +1,5 @@
 //
-//  JGTextViewController.h
+//  JGTestViewController.h
 //  JGScrollableTableViewCell Examples
 //
 //  Created by Jonas Gessner on 03.11.13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JGTextViewController : UITableViewController
+@interface JGTestViewController : UITableViewController
 
 @end

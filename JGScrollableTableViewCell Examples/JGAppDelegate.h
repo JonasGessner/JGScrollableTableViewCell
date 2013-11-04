@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class JGTextViewController;
+@class JGTestViewController;
 
 @interface JGAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (nonatomic, strong) JGTextViewController *mainViewController;
+@property (nonatomic, strong) JGTestViewController *mainViewController;
 @property (nonatomic, strong) UINavigationController *mainNavigationController;
 
 @end

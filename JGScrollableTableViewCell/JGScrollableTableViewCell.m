@@ -73,13 +73,16 @@
 
 static NSMutableDictionary *_refs;
 
-+ (void)closeAllCellsWithExceptionOf:(JGScrollableTableViewCell *)cell {
++ (void)closeAllCellsWithExceptionOf:(JGScrollableTableViewCell *)cell stopAfterFirst:(BOOL)stop {
     UITableView *host = (UITableView *)cell.superview;
     NSSet *cells = [self allCellsInTableView:host];
     
     for (JGScrollableTableViewCell *otherCell in cells) {
         if (otherCell != cell && (otherCell.scrolling || otherCell.optionViewVisible)) {
             [otherCell setOptionViewVisible:NO animated:YES];
+            if (stop) {
+                break;
+            }
         }
     }
 }

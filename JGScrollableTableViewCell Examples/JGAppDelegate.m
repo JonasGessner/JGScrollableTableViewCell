@@ -8,7 +8,7 @@
 
 #import "JGAppDelegate.h"
 
-#import "JGTextViewController.h"
+#import "JGTestViewController.h"
 
 @implementation JGAppDelegate
 
@@ -16,7 +16,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    self.mainViewController = [[JGTextViewController alloc] initWithStyle:UITableViewStylePlain];
+    self.mainViewController = [[JGTestViewController alloc] initWithStyle:UITableViewStylePlain];
     
     self.mainNavigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
     
