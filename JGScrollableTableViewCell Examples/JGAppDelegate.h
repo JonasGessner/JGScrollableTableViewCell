@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class JGTextViewController;
+
 @interface JGAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (nonatomic, strong) JGTextViewController *mainViewController;
 
 @end
