@@ -15,8 +15,8 @@
 		DD15FB9818269EE7009D5B06 /* JGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD15FB9718269EE7009D5B06 /* JGAppDelegate.m */; };
 		DD15FB9A18269EE7009D5B06 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD15FB9918269EE7009D5B06 /* Images.xcassets */; };
 		DD15FBBB18269F0D009D5B06 /* JGTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD15FBBA18269F0D009D5B06 /* JGTestViewController.m */; };
-		DD15FBBF182709C3009D5B06 /* JGScrollableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DD15FBBE182709C3009D5B06 /* JGScrollableTableViewCell.m */; };
-		DD15FBC2182709F8009D5B06 /* JGScrollableTableViewCellAccessoryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DD15FBC1182709F8009D5B06 /* JGScrollableTableViewCellAccessoryButton.m */; };
+		DD5C7CAB1828315B00D3B239 /* JGScrollableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DD5C7CA81828315B00D3B239 /* JGScrollableTableViewCell.m */; };
+		DD5C7CAC1828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DD5C7CAA1828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,10 +33,10 @@
 		DD15FB9918269EE7009D5B06 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DD15FBB918269F0D009D5B06 /* JGTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGTestViewController.h; sourceTree = "<group>"; };
 		DD15FBBA18269F0D009D5B06 /* JGTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGTestViewController.m; sourceTree = "<group>"; };
-		DD15FBBD182709C3009D5B06 /* JGScrollableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGScrollableTableViewCell.h; sourceTree = "<group>"; };
-		DD15FBBE182709C3009D5B06 /* JGScrollableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGScrollableTableViewCell.m; sourceTree = "<group>"; };
-		DD15FBC0182709F8009D5B06 /* JGScrollableTableViewCellAccessoryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGScrollableTableViewCellAccessoryButton.h; sourceTree = "<group>"; };
-		DD15FBC1182709F8009D5B06 /* JGScrollableTableViewCellAccessoryButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGScrollableTableViewCellAccessoryButton.m; sourceTree = "<group>"; };
+		DD5C7CA71828315B00D3B239 /* JGScrollableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGScrollableTableViewCell.h; sourceTree = "<group>"; };
+		DD5C7CA81828315B00D3B239 /* JGScrollableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGScrollableTableViewCell.m; sourceTree = "<group>"; };
+		DD5C7CA91828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGScrollableTableViewCellAccessoryButton.h; sourceTree = "<group>"; };
+		DD5C7CAA1828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGScrollableTableViewCellAccessoryButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +56,7 @@
 		DD15FB7B18269EE7009D5B06 = {
 			isa = PBXGroup;
 			children = (
-				DD15FBBC182709C3009D5B06 /* JGScrollableTableViewCell */,
+				DD5C7CA61828315B00D3B239 /* JGScrollableTableViewCell */,
 				DD15FB8D18269EE7009D5B06 /* JGScrollableTableViewCell Examples */,
 				DD15FB8618269EE7009D5B06 /* Frameworks */,
 				DD15FB8518269EE7009D5B06 /* Products */,
@@ -105,15 +105,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		DD15FBBC182709C3009D5B06 /* JGScrollableTableViewCell */ = {
+		DD5C7CA61828315B00D3B239 /* JGScrollableTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				DD15FBBD182709C3009D5B06 /* JGScrollableTableViewCell.h */,
-				DD15FBBE182709C3009D5B06 /* JGScrollableTableViewCell.m */,
-				DD15FBC0182709F8009D5B06 /* JGScrollableTableViewCellAccessoryButton.h */,
-				DD15FBC1182709F8009D5B06 /* JGScrollableTableViewCellAccessoryButton.m */,
+				DD5C7CA71828315B00D3B239 /* JGScrollableTableViewCell.h */,
+				DD5C7CA81828315B00D3B239 /* JGScrollableTableViewCell.m */,
+				DD5C7CA91828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.h */,
+				DD5C7CAA1828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.m */,
 			);
-			path = JGScrollableTableViewCell;
+			name = JGScrollableTableViewCell;
+			path = ../JGScrollableTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,9 +182,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD15FB9418269EE7009D5B06 /* main.m in Sources */,
-				DD15FBBF182709C3009D5B06 /* JGScrollableTableViewCell.m in Sources */,
+				DD5C7CAB1828315B00D3B239 /* JGScrollableTableViewCell.m in Sources */,
 				DD15FB9818269EE7009D5B06 /* JGAppDelegate.m in Sources */,
-				DD15FBC2182709F8009D5B06 /* JGScrollableTableViewCellAccessoryButton.m in Sources */,
+				DD5C7CAC1828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.m in Sources */,
 				DD15FBBB18269F0D009D5B06 /* JGTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
