@@ -238,6 +238,10 @@ static NSMutableDictionary *_refs;
         if (self.selected || self.highlighted || (self.grabberView && !self.optionViewVisible && !CGRectContainsPoint(self.grabberView.bounds, [_scrollView.panGestureRecognizer locationInView:self.grabberView]))) {
             _scrollView.panGestureRecognizer.enabled = NO;
             _scrollView.panGestureRecognizer.enabled = YES;
+            
+            _forceRelayout = YES;
+            [self setOptionViewVisible:self.optionViewVisible];
+            _forceRelayout = NO;
         }
         else {
             _scrolling = YES;
@@ -254,12 +258,13 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)__unused scrollView {
-    _scrolling = NO;
-    
-    _optionViewVisible = (_side == JGScrollableTableViewCellSideRight ? (_scrollView.contentOffset.x != 0.0f) : (_scrollView.contentOffset.x == 0.0f));
-    
-    if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
-        [self.scrollDelegate cellDidEndScrolling:self];
+    if (_scrolling) {
+        _scrolling = NO;
+        _optionViewVisible = (_side == JGScrollableTableViewCellSideRight ? (_scrollView.contentOffset.x != 0.0f) : (_scrollView.contentOffset.x == 0.0f));
+        
+        if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
+            [self.scrollDelegate cellDidEndScrolling:self];
+        }
     }
 }
 
@@ -291,7 +296,7 @@ static NSMutableDictionary *_refs;
     if (self.grabberView) {
         CGSize grabberSize = self.grabberView.frame.size;
         
-        self.grabberView.frame = (CGRect){{(_side == JGScrollableTableViewCellSideLeft ? 0.0f : scrollViewFrame.size.width-grabberSize.width), (scrollViewFrame.size.height-grabberSize.height)/2.0f}, grabberSize};
+        self.grabberView.frame = (CGRect){{(_side == JGScrollableTableViewCellSideLeft ? self.optionView.frame.size.width : scrollViewFrame.size.width-grabberSize.width), (scrollViewFrame.size.height-grabberSize.height)/2.0f}, grabberSize};
     }
     
     if (_side == JGScrollableTableViewCellSideRight) {
