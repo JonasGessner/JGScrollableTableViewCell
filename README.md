@@ -2,7 +2,11 @@ JGScrollableTableViewCell
 =========================
 
 JGScrollableTableViewCell is a simple and easy to use UITableViewCell subclass with a scrollable content view that exposes an accessory view when scrolled. The behavior is inspired by the iOS 7 mail app.
-
+<br>
+<br>
+<b>Current Version:<b> 1.0
+<br>
+<br>
 <p align="center"><img src="Demo.gif"/></p>
 
 ##Requirements
@@ -44,6 +48,13 @@ Sets the background color of the scroll view. Equivalent to `contentView.backgro
 - (BOOL)scrolling;
 ```
 Returns `YES`if the cell is being scrolled by the user.
+<br>
+<br>
+
+- (void)setGrabberView:(UIView *)grabberView;
+```objc
+ Sets a view to use as a grabber for the scroll view. This view is static, so it won't be resized at all by the cell. If this view is \c nil then the entire area of the scroll view is scrollable, if this view is set then scrolling can only be performed on this view.
+```
 <br>
 <br>
 

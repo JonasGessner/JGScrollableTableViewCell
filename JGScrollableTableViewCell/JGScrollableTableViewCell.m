@@ -17,9 +17,16 @@
 
 @end
 
+@protocol JGViewProvider <NSObject>
+
+- (UIView *)requestedView;
+
+@end
+
 @interface JGScrollableTableViewCellScrollView : UIScrollView
 
 @property (nonatomic, weak) id <JGTouchForwarder> forwarder;
+@property (nonatomic, weak) id <JGViewProvider> viewProvider;
 
 @end
 
@@ -32,6 +39,16 @@
     }
     else {
         return hit;
+    }
+}
+
+- (NSArray *)subviews {
+    UIView *v = [self.viewProvider requestedView];
+    if (v) {
+        return @[v];
+    }
+    else {
+        return nil;
     }
 }
 
@@ -134,11 +151,12 @@ static NSMutableDictionary *_refs;
 
 #define kJGScrollableTableViewCellAnimationDuration 0.3
 
-@interface JGScrollableTableViewCell () <JGTouchForwarder, UIScrollViewDelegate> {
+@interface JGScrollableTableViewCell () <JGTouchForwarder, JGViewProvider, UIScrollViewDelegate> {
     JGScrollableTableViewCellScrollView *_scrollView;
     UIView *_scrollViewCoverView;
     JGScrollableTableViewCellSide _side;
     BOOL _forceRelayout;
+    BOOL _cancelCurrentForwardedGesture;
     
     __weak UITableView *_hostingTableView;
 }
@@ -159,6 +177,7 @@ static NSMutableDictionary *_refs;
         _scrollView.forwarder = self;
         _scrollView.delegate = self;
         _scrollView.pagingEnabled = YES;
+        _scrollView.viewProvider = self;
         
         _scrollViewCoverView = [[UIView alloc] init];
         [_scrollView addSubview:_scrollViewCoverView];
@@ -170,20 +189,30 @@ static NSMutableDictionary *_refs;
 
 #pragma mark - Delegates
 
+- (UIView *)requestedView {
+    return _scrollViewCoverView;
+}
+
 - (void)forwardTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     if (!self.scrolling && !self.optionViewVisible) {
-        [self touchesBegan:touches withEvent:event];
+        if (self.grabberView && CGRectContainsPoint(self.grabberView.bounds, [touches.anyObject locationInView:self.grabberView])) {
+            _cancelCurrentForwardedGesture = YES;
+        }
+        else {
+            _cancelCurrentForwardedGesture = NO;
+            [self touchesBegan:touches withEvent:event];
+        }
     }
 }
 
 - (void)forwardTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (!self.scrolling && !self.optionViewVisible) {
+    if (!self.scrolling && !self.optionViewVisible && !_cancelCurrentForwardedGesture) {
         [self touchesCancelled:touches withEvent:event];
     }
 }
 
 - (void)forwardTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (!self.scrolling && !self.optionViewVisible) {
+    if (!self.scrolling && !self.optionViewVisible && !_cancelCurrentForwardedGesture) {
         [self touchesEnded:touches withEvent:event];
     }
     else if (self.optionViewVisible) {
@@ -198,7 +227,7 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)forwardTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (!self.scrolling && !self.optionViewVisible) {
+    if (!self.scrolling && !self.optionViewVisible && !_cancelCurrentForwardedGesture) {
         [self touchesCancelled:touches withEvent:event];
     }
 }
@@ -206,9 +235,15 @@ static NSMutableDictionary *_refs;
 
 - (void)scrollViewDidScroll:(UIScrollView *)__unused scrollView {
     if (!_scrolling) {
-        _scrolling = YES;
-        if ([self.scrollDelegate respondsToSelector:@selector(cellDidBeginScrolling:)]) {
-            [self.scrollDelegate cellDidBeginScrolling:self];
+        if (self.selected || self.highlighted || (self.grabberView && !self.optionViewVisible && !CGRectContainsPoint(self.grabberView.bounds, [_scrollView.panGestureRecognizer locationInView:self.grabberView]))) {
+            _scrollView.panGestureRecognizer.enabled = NO;
+            _scrollView.panGestureRecognizer.enabled = YES;
+        }
+        else {
+            _scrolling = YES;
+            if ([self.scrollDelegate respondsToSelector:@selector(cellDidBeginScrolling:)]) {
+                [self.scrollDelegate cellDidBeginScrolling:self];
+            }
         }
     }
     else {
@@ -252,6 +287,12 @@ static NSMutableDictionary *_refs;
     _scrollView.contentSize = (CGSize){scrollViewFrame.size.width+self.optionView.frame.size.width, scrollViewFrame.size.height};
     
     _scrollViewCoverView.frame = (CGRect){{(_side == JGScrollableTableViewCellSideLeft ? self.optionView.frame.size.width : 0.0f), 0.0f}, scrollViewFrame.size};
+    
+    if (self.grabberView) {
+        CGSize grabberSize = self.grabberView.frame.size;
+        
+        self.grabberView.frame = (CGRect){{(_side == JGScrollableTableViewCellSideLeft ? 0.0f : scrollViewFrame.size.width-grabberSize.width), (scrollViewFrame.size.height-grabberSize.height)/2.0f}, grabberSize};
+    }
     
     if (_side == JGScrollableTableViewCellSideRight) {
         CGSize size = (CGSize){self.optionView.frame.size.width, scrollViewFrame.size.height};
@@ -310,6 +351,19 @@ static NSMutableDictionary *_refs;
     [self setOptionViewVisible:optionViewVisible animated:NO];
 }
 
+- (void)setGrabberView:(UIView *)grabberView {
+    [self.grabberView removeFromSuperview];
+    
+    _grabberView = grabberView;
+    
+    if (self.grabberView) {
+        [_scrollView addSubview:self.grabberView];
+        
+        [self setNeedsLayout];
+        [self layoutIfNeeded];
+    }
+}
+
 - (void)setOptionView:(UIView *)view side:(JGScrollableTableViewCellSide)side {
     _side = side;
     
@@ -339,27 +393,45 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    _optionView.hidden = highlighted;
-    _scrollView.scrollEnabled = !highlighted;
+    void (^actions)(BOOL select) = ^(BOOL select) {
+        _optionView.hidden = select;
+        _scrollView.scrollEnabled = !select;
+    };
+    
+    if (highlighted) {
+        actions(highlighted);
+    }
+    
+    id previousBlock = [CATransaction completionBlock];
+    
+    [CATransaction setCompletionBlock:^{
+        actions(highlighted);
+    }];
+    
     [super setHighlighted:highlighted animated:animated];
-}
-
-- (void)setHighlighted:(BOOL)highlighted {
-    _optionView.hidden = highlighted;
-    _scrollView.scrollEnabled = !highlighted;
-    [super setHighlighted:highlighted];
+    
+    [CATransaction setCompletionBlock:previousBlock];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    _optionView.hidden = selected;
-    _scrollView.scrollEnabled = !selected;
+    void (^actions)(BOOL select) = ^(BOOL select) {
+        _optionView.hidden = select;
+        _scrollView.scrollEnabled = !select;
+    };
+    
+    if (selected) {
+        actions(selected);
+    }
+    
+    id previousBlock = [CATransaction completionBlock];
+    
+    [CATransaction setCompletionBlock:^{
+        actions(selected);
+    }];
+    
     [super setSelected:selected animated:animated];
-}
-
-- (void)setSelected:(BOOL)selected {
-    _optionView.hidden = selected;
-    _scrollView.scrollEnabled = !selected;
-    [super setSelected:selected];
+    
+    [CATransaction setCompletionBlock:previousBlock];
 }
 
 #pragma mark - Dealloc

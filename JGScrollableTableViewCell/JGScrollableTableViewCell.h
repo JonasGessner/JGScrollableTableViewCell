@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define kJGScrollableTableViewCellVersion @"1.0"
+
 @class JGScrollableTableViewCell;
 
 @protocol JGScrollableTableViewCellDelegate <NSObject>
@@ -81,6 +83,12 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
  @return The option view.
  */
 @property (nonatomic, strong, readonly) UIView *optionView;
+
+
+/**
+ A view to use as a grabber for the scroll view. This view is static, so it won't be resized at all by the cell. If this view is \c nil then the entire area of the scroll view is scrollable, if this view is set then scrolling can only be performed on this view.
+ */
+@property (nonatomic, strong) UIView *grabberView;
 
 
 /**

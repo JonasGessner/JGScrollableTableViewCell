@@ -86,6 +86,8 @@
     
     JGScrollableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
+    //this is actually a terrible implementation of JGScrollableTableViewCell, it kills performance. But it shows nicely how to use the class. In real implementations use custom subclasses of JGScrollableTableViewCell that handle content views & properties internally.
+    
     [cell setScrollViewBackgroundColor:[UIColor colorWithWhite:0.975f alpha:1.0f]];
     [cell setScrollViewInsets:UIEdgeInsetsMake(0.0f, 1.0f, 1.0f, 1.0f)];
     cell.contentView.backgroundColor = [UIColor colorWithWhite:0.7f alpha:1.0f];
@@ -117,6 +119,28 @@
     [optionView addSubview:moreView];
     [optionView addSubview:actionView];
     
+    if ((indexPath.row % 3) == 0) {
+        UIView *grabber = [[UIView alloc] initWithFrame:(CGRect){CGPointZero, {20.0f, 35.0f}}];
+        
+        UIView *dot1 = [[UIView alloc] initWithFrame:(CGRect){{10.0f, 5.0f}, {5.0f, 5.0f}}];
+        
+        UIView *dot2 = [[UIView alloc] initWithFrame:(CGRect){{10.0f, 15.0f}, {5.0f, 5.0f}}];
+        
+        UIView *dot3 = [[UIView alloc] initWithFrame:(CGRect){{10.0f, 25.0f}, {5.0f, 5.0f}}];
+        
+        dot1.backgroundColor = [UIColor colorWithWhite:0.6f alpha:1.0f];
+        dot2.backgroundColor = [UIColor colorWithWhite:0.6f alpha:1.0f];
+        dot3.backgroundColor = [UIColor colorWithWhite:0.6f alpha:1.0f];
+        
+        [grabber addSubview:dot1];
+        [grabber addSubview:dot2];
+        [grabber addSubview:dot3];
+        
+        [cell setGrabberView:grabber];
+    }
+    else {
+        [cell setGrabberView:nil];
+    }
     
     [cell setOptionView:optionView side:(_left ? JGScrollableTableViewCellSideLeft : JGScrollableTableViewCellSideRight)];
     
@@ -129,10 +153,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Selected Index Path %@", indexPath);
-}
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Deselected Index Path %@", indexPath);
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
