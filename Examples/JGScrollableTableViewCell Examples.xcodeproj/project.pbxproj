@@ -1,817 +1,348 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>DD15FB7B18269EE7009D5B06</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>DD5C7CA61828315B00D3B239</string>
-				<string>DD15FB8D18269EE7009D5B06</string>
-				<string>DD15FB8618269EE7009D5B06</string>
-				<string>DD15FB8518269EE7009D5B06</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB7C18269EE7009D5B06</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>CLASSPREFIX</key>
-				<string>JG</string>
-				<key>LastUpgradeCheck</key>
-				<string>0500</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>Jonas Gessner</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>DD15FB7F18269EE7009D5B06</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>DD15FB7B18269EE7009D5B06</string>
-			<key>productRefGroup</key>
-			<string>DD15FB8518269EE7009D5B06</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>DD15FB8318269EE7009D5B06</string>
-			</array>
-		</dict>
-		<key>DD15FB7F18269EE7009D5B06</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>DD15FBAE18269EE8009D5B06</string>
-				<string>DD15FBAF18269EE8009D5B06</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>DD15FB8018269EE7009D5B06</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>DD15FB9418269EE7009D5B06</string>
-				<string>DD5C7CAB1828315B00D3B239</string>
-				<string>DD15FB9818269EE7009D5B06</string>
-				<string>DD5C7CAC1828315B00D3B239</string>
-				<string>DD15FBBB18269F0D009D5B06</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>DD15FB8118269EE7009D5B06</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>DD15FB8A18269EE7009D5B06</string>
-				<string>DD15FB8C18269EE7009D5B06</string>
-				<string>DD15FB8818269EE7009D5B06</string>
-				<string>KIYDQKWBMRKIEYEVRWSLKUDQ</string>
-				<string>KNPONLATPTEBRUFEBXNXFHCQ</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>DD15FB8218269EE7009D5B06</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>DD15FB9218269EE7009D5B06</string>
-				<string>DD15FB9A18269EE7009D5B06</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>DD15FB8318269EE7009D5B06</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>DD15FBB018269EE8009D5B06</string>
-			<key>buildPhases</key>
-			<array>
-				<string>DD15FB8018269EE7009D5B06</string>
-				<string>DD15FB8118269EE7009D5B06</string>
-				<string>DD15FB8218269EE7009D5B06</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>JGScrollableTableViewCell Examples</string>
-			<key>productName</key>
-			<string>JGScrollableTableViewCell Examples</string>
-			<key>productReference</key>
-			<string>DD15FB8418269EE7009D5B06</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>DD15FB8418269EE7009D5B06</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>JGScrollableTableViewCell Examples.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>DD15FB8518269EE7009D5B06</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>DD15FB8418269EE7009D5B06</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB8618269EE7009D5B06</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>DD15FB8718269EE7009D5B06</string>
-				<string>DD15FB8918269EE7009D5B06</string>
-				<string>DD15FB8B18269EE7009D5B06</string>
-				<string>HYXIFWTDXJPPRRMDCEPMDTJH</string>
-				<string>THBDITSPYVFDWQYYBDCIDIXG</string>
-				<string>QMNTBWVDMICWTEJGUAKXRYSM</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB8718269EE7009D5B06</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>DD15FB8818269EE7009D5B06</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DD15FB8718269EE7009D5B06</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DD15FB8918269EE7009D5B06</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreGraphics.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/CoreGraphics.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>DD15FB8A18269EE7009D5B06</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DD15FB8918269EE7009D5B06</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DD15FB8B18269EE7009D5B06</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UIKit.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/UIKit.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>DD15FB8C18269EE7009D5B06</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DD15FB8B18269EE7009D5B06</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DD15FB8D18269EE7009D5B06</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>DD15FB9618269EE7009D5B06</string>
-				<string>DD15FB9718269EE7009D5B06</string>
-				<string>DD15FBB918269F0D009D5B06</string>
-				<string>DD15FBBA18269F0D009D5B06</string>
-				<string>DD15FB9918269EE7009D5B06</string>
-				<string>DD15FB8E18269EE7009D5B06</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>JGScrollableTableViewCell Examples</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB8E18269EE7009D5B06</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>DD15FB8F18269EE7009D5B06</string>
-				<string>DD15FB9018269EE7009D5B06</string>
-				<string>DD15FB9318269EE7009D5B06</string>
-				<string>DD15FB9518269EE7009D5B06</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB8F18269EE7009D5B06</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>JGScrollableTableViewCell Examples-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB9018269EE7009D5B06</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>DD15FB9118269EE7009D5B06</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB9118269EE7009D5B06</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
-			<key>path</key>
-			<string>en.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB9218269EE7009D5B06</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DD15FB9018269EE7009D5B06</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DD15FB9318269EE7009D5B06</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>main.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB9418269EE7009D5B06</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DD15FB9318269EE7009D5B06</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DD15FB9518269EE7009D5B06</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JGScrollableTableViewCell Examples-Prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB9618269EE7009D5B06</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JGAppDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB9718269EE7009D5B06</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JGAppDelegate.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB9818269EE7009D5B06</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DD15FB9718269EE7009D5B06</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DD15FB9918269EE7009D5B06</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FB9A18269EE7009D5B06</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DD15FB9918269EE7009D5B06</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DD15FBAE18269EE8009D5B06</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>"/Applications/Spark Inspector.app/Contents/Resources/Frameworks"</string>
-				</array>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.0</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>-ObjC</string>
-					<string>-framework SparkInspector</string>
-				</array>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>DD15FBAF18269EE8009D5B06</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.0</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>DD15FBB018269EE8009D5B06</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>DD15FBB118269EE8009D5B06</string>
-				<string>DD15FBB218269EE8009D5B06</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>DD15FBB118269EE8009D5B06</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>"/Applications/Spark Inspector.app/Contents/Resources/Frameworks"</string>
-				</array>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>JGScrollableTableViewCell Examples/JGScrollableTableViewCell Examples-Prefix.pch</string>
-				<key>GCC_WARN_UNUSED_LABEL</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_PARAMETER</key>
-				<string>NO</string>
-				<key>INFOPLIST_FILE</key>
-				<string>JGScrollableTableViewCell Examples/JGScrollableTableViewCell Examples-Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.0</string>
-				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>-ObjC</string>
-					<string>-framework SparkInspector</string>
-				</array>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>DD15FBB218269EE8009D5B06</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>JGScrollableTableViewCell Examples/JGScrollableTableViewCell Examples-Prefix.pch</string>
-				<key>GCC_WARN_UNUSED_LABEL</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_PARAMETER</key>
-				<string>NO</string>
-				<key>INFOPLIST_FILE</key>
-				<string>JGScrollableTableViewCell Examples/JGScrollableTableViewCell Examples-Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.0</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>DD15FBB918269F0D009D5B06</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JGTestViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FBBA18269F0D009D5B06</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JGTestViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD15FBBB18269F0D009D5B06</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DD15FBBA18269F0D009D5B06</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DD5C7CA61828315B00D3B239</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>DD5C7CA71828315B00D3B239</string>
-				<string>DD5C7CA81828315B00D3B239</string>
-				<string>DD5C7CA91828315B00D3B239</string>
-				<string>DD5C7CAA1828315B00D3B239</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>JGScrollableTableViewCell</string>
-			<key>path</key>
-			<string>../JGScrollableTableViewCell</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD5C7CA71828315B00D3B239</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JGScrollableTableViewCell.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD5C7CA81828315B00D3B239</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JGScrollableTableViewCell.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD5C7CA91828315B00D3B239</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JGScrollableTableViewCellAccessoryButton.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD5C7CAA1828315B00D3B239</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JGScrollableTableViewCellAccessoryButton.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD5C7CAB1828315B00D3B239</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DD5C7CA81828315B00D3B239</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DD5C7CAC1828315B00D3B239</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DD5C7CAA1828315B00D3B239</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>HYXIFWTDXJPPRRMDCEPMDTJH</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>QuartzCore.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/QuartzCore.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>KIYDQKWBMRKIEYEVRWSLKUDQ</key>
-		<dict>
-			<key>fileRef</key>
-			<string>HYXIFWTDXJPPRRMDCEPMDTJH</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>KNPONLATPTEBRUFEBXNXFHCQ</key>
-		<dict>
-			<key>fileRef</key>
-			<string>THBDITSPYVFDWQYYBDCIDIXG</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>QMNTBWVDMICWTEJGUAKXRYSM</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>SparkInspector.framework</string>
-			<key>path</key>
-			<string>/Applications/Spark Inspector.app/Contents/Resources/Frameworks/SparkInspector.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>THBDITSPYVFDWQYYBDCIDIXG</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>compiled.mach-o.dylib</string>
-			<key>name</key>
-			<string>libz.dylib</string>
-			<key>path</key>
-			<string>usr/lib/libz.dylib</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>DD15FB7C18269EE7009D5B06</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DD15FB8818269EE7009D5B06 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD15FB8718269EE7009D5B06 /* Foundation.framework */; };
+		DD15FB8A18269EE7009D5B06 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD15FB8918269EE7009D5B06 /* CoreGraphics.framework */; };
+		DD15FB8C18269EE7009D5B06 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD15FB8B18269EE7009D5B06 /* UIKit.framework */; };
+		DD15FB9218269EE7009D5B06 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD15FB9018269EE7009D5B06 /* InfoPlist.strings */; };
+		DD15FB9418269EE7009D5B06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD15FB9318269EE7009D5B06 /* main.m */; };
+		DD15FB9818269EE7009D5B06 /* JGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD15FB9718269EE7009D5B06 /* JGAppDelegate.m */; };
+		DD15FB9A18269EE7009D5B06 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD15FB9918269EE7009D5B06 /* Images.xcassets */; };
+		DD15FBBB18269F0D009D5B06 /* JGTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD15FBBA18269F0D009D5B06 /* JGTestViewController.m */; };
+		DD5C7CAB1828315B00D3B239 /* JGScrollableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DD5C7CA81828315B00D3B239 /* JGScrollableTableViewCell.m */; };
+		DD5C7CAC1828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DD5C7CAA1828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DD15FB8418269EE7009D5B06 /* JGScrollableTableViewCell Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JGScrollableTableViewCell Examples.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD15FB8718269EE7009D5B06 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DD15FB8918269EE7009D5B06 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DD15FB8B18269EE7009D5B06 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DD15FB8F18269EE7009D5B06 /* JGScrollableTableViewCell Examples-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JGScrollableTableViewCell Examples-Info.plist"; sourceTree = "<group>"; };
+		DD15FB9118269EE7009D5B06 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DD15FB9318269EE7009D5B06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DD15FB9518269EE7009D5B06 /* JGScrollableTableViewCell Examples-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JGScrollableTableViewCell Examples-Prefix.pch"; sourceTree = "<group>"; };
+		DD15FB9618269EE7009D5B06 /* JGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGAppDelegate.h; sourceTree = "<group>"; };
+		DD15FB9718269EE7009D5B06 /* JGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JGAppDelegate.m; sourceTree = "<group>"; };
+		DD15FB9918269EE7009D5B06 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DD15FBB918269F0D009D5B06 /* JGTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGTestViewController.h; sourceTree = "<group>"; };
+		DD15FBBA18269F0D009D5B06 /* JGTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGTestViewController.m; sourceTree = "<group>"; };
+		DD5C7CA71828315B00D3B239 /* JGScrollableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGScrollableTableViewCell.h; sourceTree = "<group>"; };
+		DD5C7CA81828315B00D3B239 /* JGScrollableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGScrollableTableViewCell.m; sourceTree = "<group>"; };
+		DD5C7CA91828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGScrollableTableViewCellAccessoryButton.h; sourceTree = "<group>"; };
+		DD5C7CAA1828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGScrollableTableViewCellAccessoryButton.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DD15FB8118269EE7009D5B06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD15FB8A18269EE7009D5B06 /* CoreGraphics.framework in Frameworks */,
+				DD15FB8C18269EE7009D5B06 /* UIKit.framework in Frameworks */,
+				DD15FB8818269EE7009D5B06 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DD15FB7B18269EE7009D5B06 = {
+			isa = PBXGroup;
+			children = (
+				DD5C7CA61828315B00D3B239 /* JGScrollableTableViewCell */,
+				DD15FB8D18269EE7009D5B06 /* JGScrollableTableViewCell Examples */,
+				DD15FB8618269EE7009D5B06 /* Frameworks */,
+				DD15FB8518269EE7009D5B06 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DD15FB8518269EE7009D5B06 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DD15FB8418269EE7009D5B06 /* JGScrollableTableViewCell Examples.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DD15FB8618269EE7009D5B06 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD15FB8718269EE7009D5B06 /* Foundation.framework */,
+				DD15FB8918269EE7009D5B06 /* CoreGraphics.framework */,
+				DD15FB8B18269EE7009D5B06 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DD15FB8D18269EE7009D5B06 /* JGScrollableTableViewCell Examples */ = {
+			isa = PBXGroup;
+			children = (
+				DD15FB9618269EE7009D5B06 /* JGAppDelegate.h */,
+				DD15FB9718269EE7009D5B06 /* JGAppDelegate.m */,
+				DD15FBB918269F0D009D5B06 /* JGTestViewController.h */,
+				DD15FBBA18269F0D009D5B06 /* JGTestViewController.m */,
+				DD15FB9918269EE7009D5B06 /* Images.xcassets */,
+				DD15FB8E18269EE7009D5B06 /* Supporting Files */,
+			);
+			path = "JGScrollableTableViewCell Examples";
+			sourceTree = "<group>";
+		};
+		DD15FB8E18269EE7009D5B06 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DD15FB8F18269EE7009D5B06 /* JGScrollableTableViewCell Examples-Info.plist */,
+				DD15FB9018269EE7009D5B06 /* InfoPlist.strings */,
+				DD15FB9318269EE7009D5B06 /* main.m */,
+				DD15FB9518269EE7009D5B06 /* JGScrollableTableViewCell Examples-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DD5C7CA61828315B00D3B239 /* JGScrollableTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DD5C7CA71828315B00D3B239 /* JGScrollableTableViewCell.h */,
+				DD5C7CA81828315B00D3B239 /* JGScrollableTableViewCell.m */,
+				DD5C7CA91828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.h */,
+				DD5C7CAA1828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.m */,
+			);
+			name = JGScrollableTableViewCell;
+			path = ../JGScrollableTableViewCell;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DD15FB8318269EE7009D5B06 /* JGScrollableTableViewCell Examples */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD15FBB018269EE8009D5B06 /* Build configuration list for PBXNativeTarget "JGScrollableTableViewCell Examples" */;
+			buildPhases = (
+				DD15FB8018269EE7009D5B06 /* Sources */,
+				DD15FB8118269EE7009D5B06 /* Frameworks */,
+				DD15FB8218269EE7009D5B06 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "JGScrollableTableViewCell Examples";
+			productName = "JGScrollableTableViewCell Examples";
+			productReference = DD15FB8418269EE7009D5B06 /* JGScrollableTableViewCell Examples.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DD15FB7C18269EE7009D5B06 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = JG;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Jonas Gessner";
+			};
+			buildConfigurationList = DD15FB7F18269EE7009D5B06 /* Build configuration list for PBXProject "JGScrollableTableViewCell Examples" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DD15FB7B18269EE7009D5B06;
+			productRefGroup = DD15FB8518269EE7009D5B06 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DD15FB8318269EE7009D5B06 /* JGScrollableTableViewCell Examples */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DD15FB8218269EE7009D5B06 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD15FB9218269EE7009D5B06 /* InfoPlist.strings in Resources */,
+				DD15FB9A18269EE7009D5B06 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DD15FB8018269EE7009D5B06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD15FB9418269EE7009D5B06 /* main.m in Sources */,
+				DD5C7CAB1828315B00D3B239 /* JGScrollableTableViewCell.m in Sources */,
+				DD15FB9818269EE7009D5B06 /* JGAppDelegate.m in Sources */,
+				DD5C7CAC1828315B00D3B239 /* JGScrollableTableViewCellAccessoryButton.m in Sources */,
+				DD15FBBB18269F0D009D5B06 /* JGTestViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DD15FB9018269EE7009D5B06 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD15FB9118269EE7009D5B06 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DD15FBAE18269EE8009D5B06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "\"/Applications/Spark Inspector.app/Contents/Resources/Frameworks\"";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					SparkInspector,
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DD15FBAF18269EE8009D5B06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DD15FBB118269EE8009D5B06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = "\"/Applications/Spark Inspector.app/Contents/Resources/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JGScrollableTableViewCell Examples/JGScrollableTableViewCell Examples-Prefix.pch";
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				INFOPLIST_FILE = "JGScrollableTableViewCell Examples/JGScrollableTableViewCell Examples-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					SparkInspector,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DD15FBB218269EE8009D5B06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JGScrollableTableViewCell Examples/JGScrollableTableViewCell Examples-Prefix.pch";
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				INFOPLIST_FILE = "JGScrollableTableViewCell Examples/JGScrollableTableViewCell Examples-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DD15FB7F18269EE7009D5B06 /* Build configuration list for PBXProject "JGScrollableTableViewCell Examples" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD15FBAE18269EE8009D5B06 /* Debug */,
+				DD15FBAF18269EE8009D5B06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD15FBB018269EE8009D5B06 /* Build configuration list for PBXNativeTarget "JGScrollableTableViewCell Examples" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD15FBB118269EE8009D5B06 /* Debug */,
+				DD15FBB218269EE8009D5B06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DD15FB7C18269EE7009D5B06 /* Project object */;
+}
