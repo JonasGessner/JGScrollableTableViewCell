@@ -257,6 +257,17 @@ static NSMutableDictionary *_refs;
     }
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        _scrolling = NO;
+        _optionViewVisible = (_side == JGScrollableTableViewCellSideRight ? (_scrollView.contentOffset.x != 0.0f) : (_scrollView.contentOffset.x == 0.0f));
+        
+        if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
+            [self.scrollDelegate cellDidEndScrolling:self];
+        }
+    }
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)__unused scrollView {
     if (_scrolling) {
         _scrolling = NO;
