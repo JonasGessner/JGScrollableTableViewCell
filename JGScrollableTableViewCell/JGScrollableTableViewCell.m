@@ -178,6 +178,7 @@ static NSMutableDictionary *_refs;
         _scrollView.delegate = self;
         _scrollView.pagingEnabled = YES;
         _scrollView.viewProvider = self;
+        _scrollView.scrollsToTop = NO;
         
         _scrollViewCoverView = [[UIView alloc] init];
         [_scrollView addSubview:_scrollViewCoverView];
