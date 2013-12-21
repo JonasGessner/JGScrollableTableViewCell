@@ -91,7 +91,7 @@ You should at no point add a view to the cell's directly or to its `contentView`
 <br>
 <br>
 
-###Delegation
+###Delegate
 `JGScrollableTableViewCell` has a delegate that conforms to the `JGScrollableTableViewCellDelegate` protocol. It is used for handling scroll events.
 ```objc
 @property (nonatomic, weak) id <JGScrollableTableViewCellDelegate> scrollDelegate;
@@ -106,6 +106,27 @@ The `JGScrollableTableViewCellDelegate` protocol declares three optional (self e
 - (void)cellDidEndScrolling:(JGScrollableTableViewCell *)cell;
 ```
 Ideally, your `UITableViewDelegate` should also be your `JGScrollableTableViewCellDelegate`.
+<br>
+<br>
+
+##Custom Touch handling
+
+In some special cases custom touch handling may be needed (see `Advanced` example project). There are two blocks that can be used for customizing the scrolling behavior.
+<br>
+<br>
+
+```objc
+ @property (nonatomic, copy) void (^scrollViewDidScrollBlock)(JGScrollableTableViewCell *cell, UIScrollView *scrollView);
+```
+ This block is invoked when the scroll view scrolls. Can be used to add custom behavior to the scroll view.
+<br>
+<br>
+
+
+```objc
+ @property (nonatomic, copy) BOOL (^shouldRecognizeSimultaneouslyWithGestureRecognizerBlock)(JGScrollableTableViewCell *cell, UIGestureRecognizer *otherGestureRecognizer, UIScrollView *scrollView);
+```
+This block allows custom handling of other gesture recognizers. The block should return whether the scroll view should scroll while another gesture recognizer is recognized.
 <br>
 <br>
 
@@ -173,7 +194,7 @@ The `tableView:cellForRowAtIndexPath:` method should contain this code to update
 
 ##Examples
 
-The `JGScrollableTableViewCell Examples` sample Xcode project contains implementations of all the discussed functionality.
+There are two example projects located in the `Examples` folder.
 
 ##Credits
 

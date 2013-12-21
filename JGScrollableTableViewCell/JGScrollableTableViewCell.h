@@ -1,6 +1,6 @@
 //
 //  JGScrollableTableViewCell.h
-//  JGScrollableTableViewCell Examples
+//  JGScrollableTableViewCell
 //
 //  Created by Jonas Gessner on 03.11.13.
 //  Copyright (c) 2013 Jonas Gessner. All rights reserved.
@@ -44,8 +44,7 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
 /**
  Sets the background color of the visible scroll area.
  */
-- (void)setScrollViewBackgroundColor:(UIColor *)scrollViewBackgroundColor;
-
+@property (nonatomic, strong) UIColor *scrollViewBackgroundColor;
 
 /**
  An instance conforming to the \c JGScrollableTableViewCellDelegate protocol.
@@ -105,8 +104,23 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
  */
 - (void)addContentView:(UIView *)view;
 
-@end
 
+
+//Custom touch handling
+
+
+/**
+ Invoked when the scroll view scrolls. Can be used to add custom behavior to the scroll view.
+ */
+ @property (nonatomic, copy) void (^scrollViewDidScrollBlock)(JGScrollableTableViewCell *cell, UIScrollView *scrollView);
+
+
+/**
+ Custom handling of other gesture recognizers. The block should return whether the scroll view should scroll while another gesture recognizer is recognized.
+ */
+ @property (nonatomic, copy) BOOL (^shouldRecognizeSimultaneouslyWithGestureRecognizerBlock)(JGScrollableTableViewCell *cell, UIGestureRecognizer *otherGestureRecognizer, UIScrollView *scrollView);
+
+@end
 
 
 

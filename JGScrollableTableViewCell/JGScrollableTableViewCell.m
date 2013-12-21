@@ -1,6 +1,6 @@
 //
 //  JGScrollableTableViewCell.m
-//  JGScrollableTableViewCell Examples
+//  JGScrollableTableViewCell
 //
 //  Created by Jonas Gessner on 03.11.13.
 //  Copyright (c) 2013 Jonas Gessner. All rights reserved.
@@ -19,18 +19,32 @@
 
 @protocol JGViewProvider <NSObject>
 
-- (UIView *)requestedView;
+- (UIView *)scrollViewCoverView;
+- (UITableView *)parentTableView;
 
 @end
 
-@interface JGScrollableTableViewCellScrollView : UIScrollView
 
-@property (nonatomic, weak) id <JGTouchForwarder> forwarder;
-@property (nonatomic, weak) id <JGViewProvider> viewProvider;
+@interface JGScrollableTableViewCellScrollView : UIScrollView <UIGestureRecognizerDelegate>
+
+@property (nonatomic, weak) JGScrollableTableViewCell <JGTouchForwarder, JGViewProvider> *parentCell;
 
 @end
 
 @implementation JGScrollableTableViewCellScrollView
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if (otherGestureRecognizer.view == self.parentCell.parentTableView && (otherGestureRecognizer.state == UIGestureRecognizerStateBegan || otherGestureRecognizer.state == UIGestureRecognizerStateChanged)) {
+        return NO;
+    }
+    
+    if (self.parentCell.shouldRecognizeSimultaneouslyWithGestureRecognizerBlock) {
+        return self.parentCell.shouldRecognizeSimultaneouslyWithGestureRecognizerBlock(self.parentCell, otherGestureRecognizer, self);
+    }
+    else {
+        return YES;
+    }
+}
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     UIView *hit = [super hitTest:point withEvent:event];
@@ -43,7 +57,7 @@
 }
 
 - (NSArray *)subviews {
-    UIView *v = [self.viewProvider requestedView];
+    UIView *v = [self.parentCell scrollViewCoverView];
     if (v) {
         return @[v];
     }
@@ -53,22 +67,22 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.forwarder forwardTouchesBegan:touches withEvent:event];
+    [self.parentCell forwardTouchesBegan:touches withEvent:event];
     [super touchesBegan:touches withEvent:event];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.forwarder forwardTouchesMoved:touches withEvent:event];
+    [self.parentCell forwardTouchesMoved:touches withEvent:event];
     [super touchesMoved:touches withEvent:event];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.forwarder forwardTouchesEnded:touches withEvent:event];
+    [self.parentCell forwardTouchesEnded:touches withEvent:event];
     [super touchesEnded:touches withEvent:event];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.forwarder forwardTouchesCancelled:touches withEvent:event];
+    [self.parentCell forwardTouchesCancelled:touches withEvent:event];
     [super touchesCancelled:touches withEvent:event];
 }
 
@@ -158,6 +172,8 @@ static NSMutableDictionary *_refs;
     BOOL _forceRelayout;
     BOOL _cancelCurrentForwardedGesture;
     
+    BOOL initial;
+    
     __weak UITableView *_hostingTableView;
 }
 
@@ -174,10 +190,10 @@ static NSMutableDictionary *_refs;
         _scrollView = [[JGScrollableTableViewCellScrollView alloc] init];
         _scrollView.backgroundColor = [UIColor clearColor];
         _scrollView.showsHorizontalScrollIndicator = NO;
-        _scrollView.forwarder = self;
+        _scrollView.parentCell = self;
         _scrollView.delegate = self;
         _scrollView.pagingEnabled = YES;
-        _scrollView.viewProvider = self;
+        _scrollView.scrollsToTop = NO;
         
         _scrollViewCoverView = [[UIView alloc] init];
         [_scrollView addSubview:_scrollViewCoverView];
@@ -189,8 +205,12 @@ static NSMutableDictionary *_refs;
 
 #pragma mark - Delegates
 
-- (UIView *)requestedView {
+- (UIView *)scrollViewCoverView {
     return _scrollViewCoverView;
+}
+
+- (UITableView *)parentTableView {
+    return _hostingTableView;
 }
 
 - (void)forwardTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -235,6 +255,9 @@ static NSMutableDictionary *_refs;
 
 - (void)scrollViewDidScroll:(UIScrollView *)__unused scrollView {
     if (!_scrolling) {
+        if (!_optionViewVisible) {
+            initial = YES;
+        }
         if (self.selected || self.highlighted || (self.grabberView && !self.optionViewVisible && !CGRectContainsPoint(self.grabberView.bounds, [_scrollView.panGestureRecognizer locationInView:self.grabberView]))) {
             _scrollView.panGestureRecognizer.enabled = NO;
             _scrollView.panGestureRecognizer.enabled = YES;
@@ -254,6 +277,10 @@ static NSMutableDictionary *_refs;
         if ([self.scrollDelegate respondsToSelector:@selector(cellDidScroll:)]) {
             [self.scrollDelegate cellDidScroll:self];
         }
+    }
+    
+    if (self.scrollViewDidScrollBlock) {
+        self.scrollViewDidScrollBlock(self, _scrollView);
     }
 }
 
@@ -286,13 +313,20 @@ static NSMutableDictionary *_refs;
     [super willMoveToSuperview:newSuperview];
     
     _hostingTableView = (UITableView *)newSuperview;
+    
+    NSAssert1([_hostingTableView isKindOfClass:[UITableView class]], @"Superview %@ is not a UITableView", _hostingTableView);
+    
     [JGScrollableTableViewCellManager referenceCell:self inTableView:_hostingTableView];
+}
+
+- (CGRect)contentBounds {
+    return self.contentView.bounds;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGRect scrollViewFrame = UIEdgeInsetsInsetRect(self.contentView.bounds, self.scrollViewInsets);
+    CGRect scrollViewFrame = UIEdgeInsetsInsetRect(self.contentBounds, self.scrollViewInsets);
     
     _scrollView.delegate = nil;
     
@@ -394,7 +428,10 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)setScrollViewBackgroundColor:(UIColor *)scrollViewBackgroundColor {
+    _scrollViewBackgroundColor = scrollViewBackgroundColor;
+    
     _scrollViewCoverView.backgroundColor = scrollViewBackgroundColor;
+    self.backgroundColor = scrollViewBackgroundColor;
 }
 
 - (void)setScrollViewInsets:(UIEdgeInsets)scrollViewInsets {
@@ -426,6 +463,8 @@ static NSMutableDictionary *_refs;
     
     [super setHighlighted:highlighted animated:animated];
     
+    self.backgroundColor = self.scrollViewBackgroundColor;
+    
     [CATransaction setCompletionBlock:previousBlock];
 }
 
@@ -447,6 +486,8 @@ static NSMutableDictionary *_refs;
     
     [super setSelected:selected animated:animated];
     
+    self.backgroundColor = self.scrollViewBackgroundColor;
+    
     [CATransaction setCompletionBlock:previousBlock];
 }
 
@@ -455,5 +496,10 @@ static NSMutableDictionary *_refs;
 - (void)dealloc {
     [JGScrollableTableViewCellManager removeCellReference:self inTableView:_hostingTableView];
 }
+
+@end
+
+@implementation JGScrollableTableViewCell (CustomTouchHandling)
+
 
 @end
