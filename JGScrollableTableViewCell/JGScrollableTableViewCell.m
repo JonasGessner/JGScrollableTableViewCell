@@ -312,11 +312,16 @@ static NSMutableDictionary *_refs;
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     
-    _hostingTableView = (UITableView *)newSuperview;
-    
-    NSAssert1([_hostingTableView isKindOfClass:[UITableView class]], @"Superview %@ is not a UITableView", _hostingTableView);
-    
-    [JGScrollableTableViewCellManager referenceCell:self inTableView:_hostingTableView];
+    if (newSuperview) {
+        _hostingTableView = (UITableView *)newSuperview;
+        
+        NSAssert1([_hostingTableView isKindOfClass:[UITableView class]], @"Superview %@ is not a UITableView", _hostingTableView);
+        
+        [JGScrollableTableViewCellManager referenceCell:self inTableView:_hostingTableView];
+    }
+    else if (_hostingTableView) {
+        [JGScrollableTableViewCellManager removeCellReference:self inTableView:_hostingTableView];
+    }
 }
 
 - (CGRect)contentBounds {
