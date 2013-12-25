@@ -314,9 +314,7 @@ static NSMutableDictionary *_refs;
     
     if (newSuperview) {
         _hostingTableView = (UITableView *)newSuperview;
-        
-        NSAssert1([_hostingTableView isKindOfClass:[UITableView class]], @"Superview %@ is not a UITableView", _hostingTableView);
-        
+
         [JGScrollableTableViewCellManager referenceCell:self inTableView:_hostingTableView];
     }
     else if (_hostingTableView) {
