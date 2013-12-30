@@ -1,4 +1,4 @@
-<h1>JGScrollableTableViewCell</h1><h6>© 2013-2014 Jonas Gessner</h6>
+<h1>JGScrollableTableViewCell</h1><h6>© 2013 Jonas Gessner</h6>
 
 ----------------
 <br>
