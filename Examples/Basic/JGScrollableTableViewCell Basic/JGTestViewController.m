@@ -27,7 +27,7 @@
         
         [self.tableView registerClass:[JGExampleScrollableTableViewCell class] forCellReuseIdentifier:@"ScrollCell"];
         
-        self.title = @"JGScrollableTavleViewCell";
+        self.title = @"JGScrollableTableViewCell";
     }
     return self;
 }
