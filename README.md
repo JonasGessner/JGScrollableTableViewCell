@@ -22,7 +22,7 @@ JGScrollableTableViewCell is a simple and easy to use UITableViewCell subclass w
 
 `JGScrollableTableViewCell` works just like any other `UITableViewCell`: Highlighting, selection, and `UITableViewDelegate` calls all work like normal. The only difference is that the cell's `contentView` is covered by a `UIScrollView` that basically becomes the new content view – which is scrollable.
 
-An "option view" can be assigned to the cell, which is placed behind the scroll view, making it possible to scroll on the cell to reveal the option view behind it. This option view can be displayed on the right side of the cell or on the left side of the cell.
+An "option view" can be assigned to the cell, which is placed behind the scroll view, making it possible to scroll on the cell to reveal the option view behind it.
 
 <b>Note:</b> You should always use custom subclasses of `JGScrollableTableViewCell` that add your custom content to the cell (ex labels & image views).
 
@@ -63,10 +63,9 @@ Returns `YES`if the cell is being scrolled by the user.
 ####The option view
 
 ```objc
-- (void)setOptionView:(UIView *)view side:(JGScrollableTableViewCellSide)side;
+- (void)setOptionView:(UIView *)view ;
 ```
-Sets a new option view & removes the old option view. `side` is the side on which the option view will appear (left or right).
-The option view will be dynamically resized to fit the cell's size and the scroll view's insets. The only parameter that is not changed is the view's width. The width should be set before passing the view to this method and will always stay the same.
+Sets a new option view & removes the old option view. The option view will be dynamically resized to fit the cell's size and the scroll view's insets. The only parameter of the option view's `frame` that is not changed is the width. The width should be set before passing the view to this method and should not be changed afterwards.
 <br>
 <br>
 
