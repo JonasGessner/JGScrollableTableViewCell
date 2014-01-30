@@ -14,7 +14,6 @@
 
 @interface JGTestViewController () <JGScrollableTableViewCellDelegate> {
     NSIndexPath *_openedIndexPath;
-    BOOL _left;
 }
 
 @end
@@ -28,22 +27,10 @@
         
         [self.tableView registerClass:[JGExampleScrollableTableViewCell class] forCellReuseIdentifier:@"ScrollCell"];
         
-        UISwitch *s = [[UISwitch alloc] init];
-        [s addTarget:self action:@selector(switched:) forControlEvents:UIControlEventValueChanged];
-        
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:s];
-        
-        self.title = @"Option view on the left->";
+        self.title = @"JGScrollableTavleViewCell";
     }
     return self;
 }
-
-
-- (void)switched:(UISwitch *)sender {
-    _left = sender.on;
-    [self.tableView reloadData];
-}
-
 
 #pragma mark - JGScrollableTableViewCellDelegate
 
@@ -86,8 +73,6 @@
     JGExampleScrollableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     [cell setGrabberVisible:((indexPath.row % 3) == 0)];
-    
-    [cell setOptionView:cell.optionView side:(_left ? JGScrollableTableViewCellSideLeft : JGScrollableTableViewCellSideRight)];
     
     cell.scrollDelegate = self;
     

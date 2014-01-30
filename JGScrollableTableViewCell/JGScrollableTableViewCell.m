@@ -92,8 +92,8 @@
 
 @interface JGScrollableTableViewCellManager ()
 
-+ (void)referenceCell:(JGScrollableTableViewCell *)cell inTableView:(UITableView *)host;
-+ (void)removeCellReference:(JGScrollableTableViewCell *)cell inTableView:(UITableView *)host;
++ (void)referenceCell:(JGScrollableTableViewCell *)cell inView:(UIView *)host;
++ (void)removeCellReference:(JGScrollableTableViewCell *)cell inView:(UIView *)host;
 
 + (NSSet *)allCellsInTableView:(UITableView *)host;
 
@@ -118,7 +118,10 @@ static NSMutableDictionary *_refs;
     }
 }
 
-+ (void)removeCellReference:(JGScrollableTableViewCell *)cell inTableView:(UITableView *)host {
++ (void)removeCellReference:(JGScrollableTableViewCell *)cell inView:(UIView *)host {
+    if (!host) {
+        return;
+    }
     NSAssert([NSThread isMainThread], @"JGScrollableTableViewCellManager should only be used on the main thread");
     
     NSValue *key = [NSValue valueWithNonretainedObject:host];
@@ -135,7 +138,10 @@ static NSMutableDictionary *_refs;
     }
 }
 
-+ (void)referenceCell:(JGScrollableTableViewCell *)cell inTableView:(UITableView *)host {
++ (void)referenceCell:(JGScrollableTableViewCell *)cell inView:(UIView *)host {
+    if (!host) {
+        return;
+    }
     NSAssert([NSThread isMainThread], @"JGScrollableTableViewCellManager should only be used on the main thread");
     
     if (!_refs) {
@@ -167,15 +173,18 @@ static NSMutableDictionary *_refs;
 
 @interface JGScrollableTableViewCell () <JGTouchForwarder, JGViewProvider, UIScrollViewDelegate> {
     JGScrollableTableViewCellScrollView *_scrollView;
-    UIView *_scrollViewCoverView;
-    JGScrollableTableViewCellSide _side;
+    
     BOOL _forceRelayout;
     BOOL _cancelCurrentForwardedGesture;
     
-    BOOL initial;
+    NSUInteger _ignoreScrollEvents;
     
-    __weak UITableView *_hostingTableView;
+    CGPoint _startingDrag;
+    
+    __weak UIView *_hostingView;
 }
+
+@property (nonatomic, strong, readonly) UIView *scrollViewCoverView;
 
 @end
 
@@ -205,12 +214,14 @@ static NSMutableDictionary *_refs;
 
 #pragma mark - Delegates
 
-- (UIView *)scrollViewCoverView {
-    return _scrollViewCoverView;
-}
-
 - (UITableView *)parentTableView {
-    return _hostingTableView;
+    UIView *sup = self.superview;
+    
+    while (sup != nil && ![sup isKindOfClass:[UITableView class]]) {
+        sup = sup.superview;
+    }
+    
+    return (UITableView *)sup;
 }
 
 - (void)forwardTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -252,19 +263,15 @@ static NSMutableDictionary *_refs;
     }
 }
 
-
-- (void)scrollViewDidScroll:(UIScrollView *)__unused scrollView {
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (_ignoreScrollEvents) {
+        return;
+    }
+    
     if (!_scrolling) {
-        if (!_optionViewVisible) {
-            initial = YES;
-        }
         if (self.selected || self.highlighted || (self.grabberView && !self.optionViewVisible && !CGRectContainsPoint(self.grabberView.bounds, [_scrollView.panGestureRecognizer locationInView:self.grabberView]))) {
             _scrollView.panGestureRecognizer.enabled = NO;
             _scrollView.panGestureRecognizer.enabled = YES;
-            
-            _forceRelayout = YES;
-            [self setOptionViewVisible:self.optionViewVisible];
-            _forceRelayout = NO;
         }
         else {
             _scrolling = YES;
@@ -273,36 +280,59 @@ static NSMutableDictionary *_refs;
             }
         }
     }
-    else {
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)__unused scrollView {
+    if (_ignoreScrollEvents) {
+        return;
+    }
+    
+    if (_scrolling) {
         if ([self.scrollDelegate respondsToSelector:@selector(cellDidScroll:)]) {
             [self.scrollDelegate cellDidScroll:self];
         }
-    }
-    
-    if (self.scrollViewDidScrollBlock) {
-        self.scrollViewDidScrollBlock(self, _scrollView);
+        
+        if (self.scrollViewDidScrollBlock) {
+            self.scrollViewDidScrollBlock(self, _scrollView);
+        }
     }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (!decelerate) {
+    if (_ignoreScrollEvents) {
+        return;
+    }
+    
+    if (!decelerate && _scrolling) {
         _scrolling = NO;
-        _optionViewVisible = (_side == JGScrollableTableViewCellSideRight ? (_scrollView.contentOffset.x != 0.0f) : (_scrollView.contentOffset.x == 0.0f));
+        
+        _optionViewVisible = (_scrollView.contentOffset.x != 0.0f);
         
         if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
             [self.scrollDelegate cellDidEndScrolling:self];
         }
     }
+    else if (!_scrolling) {
+        [self setNeedsLayout];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)__unused scrollView {
+    if (_ignoreScrollEvents) {
+        return;
+    }
+    
     if (_scrolling) {
         _scrolling = NO;
-        _optionViewVisible = (_side == JGScrollableTableViewCellSideRight ? (_scrollView.contentOffset.x != 0.0f) : (_scrollView.contentOffset.x == 0.0f));
+        
+        _optionViewVisible = (_scrollView.contentOffset.x != 0.0f);
         
         if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
             [self.scrollDelegate cellDidEndScrolling:self];
         }
+    }
+    else {
+        [self setNeedsLayout];
     }
 }
 
@@ -313,12 +343,12 @@ static NSMutableDictionary *_refs;
     [super willMoveToSuperview:newSuperview];
     
     if (newSuperview) {
-        _hostingTableView = (UITableView *)newSuperview;
+        _hostingView = newSuperview;
 
-        [JGScrollableTableViewCellManager referenceCell:self inTableView:_hostingTableView];
+        [JGScrollableTableViewCellManager referenceCell:self inView:_hostingView];
     }
-    else if (_hostingTableView) {
-        [JGScrollableTableViewCellManager removeCellReference:self inTableView:_hostingTableView];
+    else if (_hostingView) {
+        [JGScrollableTableViewCellManager removeCellReference:self inView:_hostingView];
     }
 }
 
@@ -331,36 +361,29 @@ static NSMutableDictionary *_refs;
     
     CGRect scrollViewFrame = UIEdgeInsetsInsetRect(self.contentBounds, self.scrollViewInsets);
     
-    _scrollView.delegate = nil;
+    _ignoreScrollEvents++;
     
     _scrollView.frame = scrollViewFrame;
     
-    _scrollView.delegate = self;
-    
     _scrollView.contentSize = (CGSize){scrollViewFrame.size.width+self.optionView.frame.size.width, scrollViewFrame.size.height};
     
-    _scrollViewCoverView.frame = (CGRect){{(_side == JGScrollableTableViewCellSideLeft ? self.optionView.frame.size.width : 0.0f), 0.0f}, scrollViewFrame.size};
+    _scrollViewCoverView.frame = (CGRect){CGPointZero, scrollViewFrame.size};
     
     if (self.grabberView) {
         CGSize grabberSize = self.grabberView.frame.size;
         
-        self.grabberView.frame = (CGRect){{(_side == JGScrollableTableViewCellSideLeft ? self.optionView.frame.size.width : scrollViewFrame.size.width-grabberSize.width), (scrollViewFrame.size.height-grabberSize.height)/2.0f}, grabberSize};
+        self.grabberView.frame = (CGRect){{scrollViewFrame.size.width-grabberSize.width, (scrollViewFrame.size.height-grabberSize.height)/2.0f}, grabberSize};
     }
+
+    CGSize size = (CGSize){self.optionView.frame.size.width, scrollViewFrame.size.height};
     
-    if (_side == JGScrollableTableViewCellSideRight) {
-        CGSize size = (CGSize){self.optionView.frame.size.width, scrollViewFrame.size.height};
-        
-        self.optionView.frame = (CGRect){{CGRectGetMaxX(scrollViewFrame)-self.optionView.frame.size.width, 0.0f}, size};
-    }
-    else {
-        CGSize size = (CGSize){self.optionView.frame.size.width, scrollViewFrame.size.height};
-        
-        self.optionView.frame = (CGRect){{self.scrollViewInsets.left, self.scrollViewInsets.top}, size};
-    }
+    self.optionView.frame = (CGRect){{CGRectGetMaxX(scrollViewFrame)-self.optionView.frame.size.width, 0.0f}, size};
     
     _forceRelayout = YES; //enusres that next call is actually executed
     [self setOptionViewVisible:self.optionViewVisible]; //sets correct contentOffset
     _forceRelayout = NO;
+    
+    _ignoreScrollEvents--;
 }
 
 #pragma mark - Setters
@@ -377,23 +400,19 @@ static NSMutableDictionary *_refs;
     _scrolling = NO;
     _optionViewVisible = optionViewVisible;
     
-    _scrollView.delegate = nil;
+    _ignoreScrollEvents++;
     
     CGPoint scrollDestination;
-    
-    if (_side == JGScrollableTableViewCellSideLeft) {
-        scrollDestination = (CGPoint){(_optionViewVisible ? 0.0f : _scrollView.contentSize.width-1.0f), 0.0f};
-    }
-    else  {
-        scrollDestination = (CGPoint){(_optionViewVisible ? _scrollView.contentSize.width-1.0f : 0.0f), 0.0f};
-    }
+
+    scrollDestination = (CGPoint){(_optionViewVisible ? _scrollView.contentSize.width-1.0f : 0.0f), 0.0f};
     
     [UIView animateWithDuration:duration delay:0.0 options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
         [_scrollView.panGestureRecognizer setEnabled:NO];
         [_scrollView scrollRectToVisible:(CGRect){scrollDestination, {1.0f, 1.0f}} animated:NO];
     } completion:^(__unused BOOL finished) {
         [_scrollView.panGestureRecognizer setEnabled:YES];
-        _scrollView.delegate = self;
+        _ignoreScrollEvents--;
+        
         if (completion) {
             completion();
         }
@@ -417,9 +436,7 @@ static NSMutableDictionary *_refs;
     }
 }
 
-- (void)setOptionView:(UIView *)view side:(JGScrollableTableViewCellSide)side {
-    _side = side;
-    
+- (void)setOptionView:(UIView *)view {
     [self.optionView removeFromSuperview];
     
     _optionView = view;
@@ -497,12 +514,7 @@ static NSMutableDictionary *_refs;
 #pragma mark - Dealloc
 
 - (void)dealloc {
-    [JGScrollableTableViewCellManager removeCellReference:self inTableView:_hostingTableView];
+    [JGScrollableTableViewCellManager removeCellReference:self inView:_hostingView];
 }
-
-@end
-
-@implementation JGScrollableTableViewCell (CustomTouchHandling)
-
 
 @end

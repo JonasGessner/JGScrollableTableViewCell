@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kJGScrollableTableViewCellVersion @"1.0"
+#define kJGScrollableTableViewCellVersion @"1.0.2"
 
 @class JGScrollableTableViewCell;
 
@@ -21,11 +21,6 @@
 
 @end
 
-
-typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
-    JGScrollableTableViewCellSideLeft = NO,
-    JGScrollableTableViewCellSideRight = YES
-};
 
 /**
  Cell with scrollable content and an option view that is revealed when scrolling on the cell.
@@ -81,22 +76,13 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
  The option view is set with the \c setOptionView:side: method.
  @return The option view.
  */
-@property (nonatomic, strong, readonly) UIView *optionView;
+@property (nonatomic, strong) UIView *optionView;
 
 
 /**
  A view to use as a grabber for the scroll view. This view is static, so it won't be resized at all by the cell. If this view is \c nil then the entire area of the scroll view is scrollable, if this view is set then scrolling can only be performed on this view.
  */
 @property (nonatomic, strong) UIView *grabberView;
-
-
-/**
- Sets a new option view & removes the old option view.
- @param view The option view to add. The view's width should be set, all ofther frame paramaters are ignored.
- @param side The side on which the view should be placed. Either left or right.
- */
-- (void)setOptionView:(UIView *)view side:(JGScrollableTableViewCellSide)side;
-
 
 /**
  Adds a view to the scrolling area of the cell.

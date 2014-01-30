@@ -6,7 +6,7 @@
 JGScrollableTableViewCell is a simple and easy to use UITableViewCell subclass with a scrollable content view that exposes an accessory view when scrolled. The behavior is inspired by the iOS 7 mail app.
 <br>
 <br>
-<b>Current Version:<b> 1.0.1
+<b>Current Version:<b> 1.0.2
 <br>
 <br>
 <p align="center"><img src="Demo.gif"/></p>
