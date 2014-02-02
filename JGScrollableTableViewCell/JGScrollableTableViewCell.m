@@ -109,10 +109,12 @@ static NSMutableDictionary *_refs;
     NSSet *cells = [self allCellsInTableView:host];
     
     for (JGScrollableTableViewCell *otherCell in cells) {
-        if (otherCell != cell && (otherCell.scrolling || otherCell.optionViewVisible)) {
-            [otherCell setOptionViewVisible:NO animated:YES];
-            if (stop) {
-                break;
+        if (otherCell != cell) {
+            if (otherCell.isScrolling || otherCell.optionViewVisible) {
+                [otherCell setOptionViewVisible:NO animated:YES];
+                if (stop) {
+                    break;
+                }
             }
         }
     }
@@ -172,14 +174,13 @@ static NSMutableDictionary *_refs;
 #define kJGScrollableTableViewCellAnimationDuration 0.3
 
 @interface JGScrollableTableViewCell () <JGTouchForwarder, JGViewProvider, UIScrollViewDelegate> {
-    JGScrollableTableViewCellScrollView *_scrollView;
-    
     BOOL _forceRelayout;
     BOOL _cancelCurrentForwardedGesture;
     
-    NSUInteger _ignoreScrollEvents;
+    BOOL _scrolling;
+    BOOL _scrollingHasEnded;
     
-    CGPoint _startingDrag;
+    NSUInteger _ignoreScrollEvents;
     
     __weak UIView *_hostingView;
 }
@@ -199,7 +200,7 @@ static NSMutableDictionary *_refs;
         _scrollView = [[JGScrollableTableViewCellScrollView alloc] init];
         _scrollView.backgroundColor = [UIColor clearColor];
         _scrollView.showsHorizontalScrollIndicator = NO;
-        _scrollView.parentCell = self;
+        ((JGScrollableTableViewCellScrollView *)_scrollView).parentCell = self;
         _scrollView.delegate = self;
         _scrollView.pagingEnabled = YES;
         _scrollView.scrollsToTop = NO;
@@ -225,7 +226,7 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)forwardTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (!self.scrolling && !self.optionViewVisible) {
+    if (!self.isScrolling && !self.optionViewVisible) {
         if (self.grabberView && CGRectContainsPoint(self.grabberView.bounds, [touches.anyObject locationInView:self.grabberView])) {
             _cancelCurrentForwardedGesture = YES;
         }
@@ -237,13 +238,13 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)forwardTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (!self.scrolling && !self.optionViewVisible && !_cancelCurrentForwardedGesture) {
+    if (!self.isScrolling && !self.optionViewVisible && !_cancelCurrentForwardedGesture) {
         [self touchesCancelled:touches withEvent:event];
     }
 }
 
 - (void)forwardTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (!self.scrolling && !self.optionViewVisible && !_cancelCurrentForwardedGesture) {
+    if (!self.isScrolling && !self.optionViewVisible && !_cancelCurrentForwardedGesture) {
         [self touchesEnded:touches withEvent:event];
     }
     else if (self.optionViewVisible) {
@@ -258,7 +259,7 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)forwardTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (!self.scrolling && !self.optionViewVisible && !_cancelCurrentForwardedGesture) {
+    if (!self.isScrolling && !self.optionViewVisible && !_cancelCurrentForwardedGesture) {
         [self touchesCancelled:touches withEvent:event];
     }
 }
@@ -269,7 +270,7 @@ static NSMutableDictionary *_refs;
     }
     
     if (!_scrolling) {
-        if (self.selected || self.highlighted || (self.grabberView && !self.optionViewVisible && !CGRectContainsPoint(self.grabberView.bounds, [_scrollView.panGestureRecognizer locationInView:self.grabberView]))) {
+        if (!_scrollingHasEnded && (self.selected || self.highlighted || (self.grabberView && !self.optionViewVisible && !CGRectContainsPoint(self.grabberView.bounds, [_scrollView.panGestureRecognizer locationInView:self.grabberView])))) {
             _scrollView.panGestureRecognizer.enabled = NO;
             _scrollView.panGestureRecognizer.enabled = YES;
         }
@@ -303,8 +304,11 @@ static NSMutableDictionary *_refs;
         return;
     }
     
-    if (!decelerate && _scrolling) {
-        _scrolling = NO;
+    _scrollingHasEnded = _scrolling;
+    _scrolling = NO;
+    
+    if (!decelerate && _scrollingHasEnded) {
+        _scrollingHasEnded = NO;
         
         _optionViewVisible = (_scrollView.contentOffset.x != 0.0f);
         
@@ -312,7 +316,7 @@ static NSMutableDictionary *_refs;
             [self.scrollDelegate cellDidEndScrolling:self];
         }
     }
-    else if (!_scrolling) {
+    else if (!_scrollingHasEnded) {
         [self setNeedsLayout];
     }
 }
@@ -322,8 +326,8 @@ static NSMutableDictionary *_refs;
         return;
     }
     
-    if (_scrolling) {
-        _scrolling = NO;
+    if (_scrollingHasEnded) {
+        _scrollingHasEnded = NO;
         
         _optionViewVisible = (_scrollView.contentOffset.x != 0.0f);
         
@@ -344,7 +348,7 @@ static NSMutableDictionary *_refs;
     
     if (newSuperview) {
         _hostingView = newSuperview;
-
+        
         [JGScrollableTableViewCellManager referenceCell:self inView:_hostingView];
     }
     else if (_hostingView) {
@@ -357,33 +361,42 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    CGRect scrollViewFrame = UIEdgeInsetsInsetRect(self.contentBounds, self.scrollViewInsets);
-    
-    _ignoreScrollEvents++;
-    
-    _scrollView.frame = scrollViewFrame;
-    
-    _scrollView.contentSize = (CGSize){scrollViewFrame.size.width+self.optionView.frame.size.width, scrollViewFrame.size.height};
-    
-    _scrollViewCoverView.frame = (CGRect){CGPointZero, scrollViewFrame.size};
-    
-    if (self.grabberView) {
-        CGSize grabberSize = self.grabberView.frame.size;
+    if (!self.isScrolling) {
+        [super layoutSubviews];
         
-        self.grabberView.frame = (CGRect){{scrollViewFrame.size.width-grabberSize.width, (scrollViewFrame.size.height-grabberSize.height)/2.0f}, grabberSize};
+        CGRect scrollViewFrame = UIEdgeInsetsInsetRect(self.contentBounds, self.scrollViewInsets);
+        
+        _ignoreScrollEvents++;
+        
+        _scrollView.frame = scrollViewFrame;
+        
+        _scrollView.contentSize = (CGSize){scrollViewFrame.size.width+self.optionView.frame.size.width, scrollViewFrame.size.height};
+        
+        _scrollViewCoverView.frame = (CGRect){CGPointZero, scrollViewFrame.size};
+        
+        if (self.grabberView) {
+            CGSize grabberSize = self.grabberView.frame.size;
+            
+            self.grabberView.frame = (CGRect){{scrollViewFrame.size.width-grabberSize.width, (scrollViewFrame.size.height-grabberSize.height)/2.0f}, grabberSize};
+        }
+        
+        CGSize size = (CGSize){self.optionView.frame.size.width, scrollViewFrame.size.height};
+        
+        self.optionView.frame = (CGRect){{CGRectGetMaxX(scrollViewFrame)-self.optionView.frame.size.width, 0.0f}, size};
+        
+        
+        _forceRelayout = YES; //enusres that next call is actually executed
+        [self setOptionViewVisible:self.optionViewVisible]; //sets correct contentOffset
+        _forceRelayout = NO;
+        
+        _ignoreScrollEvents--;
     }
+}
 
-    CGSize size = (CGSize){self.optionView.frame.size.width, scrollViewFrame.size.height};
-    
-    self.optionView.frame = (CGRect){{CGRectGetMaxX(scrollViewFrame)-self.optionView.frame.size.width, 0.0f}, size};
-    
-    _forceRelayout = YES; //enusres that next call is actually executed
-    [self setOptionViewVisible:self.optionViewVisible]; //sets correct contentOffset
-    _forceRelayout = NO;
-    
-    _ignoreScrollEvents--;
+#pragma mark - Getters
+
+- (BOOL)isScrolling {
+    return (_scrolling || _scrollingHasEnded);
 }
 
 #pragma mark - Setters
@@ -393,17 +406,19 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)setOptionViewVisible:(BOOL)optionViewVisible animationDuration:(NSTimeInterval)duration completion:(void (^)(void))completion {
-    if (!_forceRelayout && _optionViewVisible == optionViewVisible && !self.scrolling) {
+    if (!_forceRelayout && _optionViewVisible == optionViewVisible && !self.isScrolling) {
         return;
     }
     
     _scrolling = NO;
+    _scrollingHasEnded = NO;
+    
     _optionViewVisible = optionViewVisible;
     
     _ignoreScrollEvents++;
     
     CGPoint scrollDestination;
-
+    
     scrollDestination = (CGPoint){(_optionViewVisible ? _scrollView.contentSize.width-1.0f : 0.0f), 0.0f};
     
     [UIView animateWithDuration:duration delay:0.0 options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState animations:^{

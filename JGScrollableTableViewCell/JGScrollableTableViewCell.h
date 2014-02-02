@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kJGScrollableTableViewCellVersion @"1.0.2"
+#define kJGScrollableTableViewCellVersion @"1.0.3"
 
 @class JGScrollableTableViewCell;
 
@@ -35,6 +35,11 @@
  */
 @property (nonatomic, assign) UIEdgeInsets scrollViewInsets;
 
+/**
+ The scroll view used in the cell. Do not add any subviews to the scrollview or modify its frame, bounds, contentOffset or contentInset.
+ */
+@property (nonatomic, strong, readonly) UIScrollView *scrollView;
+
 
 /**
  Sets the background color of the visible scroll area.
@@ -49,10 +54,9 @@
 
 /**
  @warning When the cell is selected or highlighted the scroll view won't be able to scroll. (This shouldn't be a problem anyway)
- @return If the user is currently dragging the scroll view.
+ @return If the user is currently dragging the scroll view or if the scroll view is decelerating.
  */
-@property (nonatomic, assign, readonly) BOOL scrolling;
-
+- (BOOL)isScrolling;
 
 
 //Opened sides
