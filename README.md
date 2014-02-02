@@ -60,10 +60,10 @@ Returns `YES` if the user is currently dragging the scroll view or if the scroll
 <br>
 <br>
 
-- (void)setGrabberView:(UIView *)grabberView;
 ```objc
- Sets a view to use as a grabber for the scroll view. This view is static, so it won't be resized at all by the cell. If this view is \c nil then the entire area of the scroll view is scrollable, if this view is set then scrolling can only be performed on this view.
+- (void)setGrabberView:(UIView *)grabberView;
 ```
+ Sets a view to use as a grabber for the scroll view. This view is static, so it won't be resized at all by the cell. If this view is \c nil then the entire area of the scroll view is scrollable, if this view is set then scrolling can only be performed on this view.
 <br>
 <br>
 
