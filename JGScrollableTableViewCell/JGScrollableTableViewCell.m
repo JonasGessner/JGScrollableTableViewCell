@@ -49,7 +49,12 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     UIView *hit = [super hitTest:point withEvent:event];
     if (hit == self) {
-        return nil;
+        if (CGRectContainsPoint(self.parentCell.optionView.frame, [self convertPoint:point toView:self.parentCell])) {
+            return self.parentCell.optionView;
+        }
+        else {
+            return self;
+        }
     }
     else {
         return hit;
@@ -304,20 +309,15 @@ static NSMutableDictionary *_refs;
         return;
     }
     
-    _scrollingHasEnded = _scrolling;
+    _scrollingHasEnded = decelerate;
     _scrolling = NO;
     
-    if (!decelerate && _scrollingHasEnded) {
-        _scrollingHasEnded = NO;
-        
+    if (!decelerate) {
         _optionViewVisible = (_scrollView.contentOffset.x != 0.0f);
         
         if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
             [self.scrollDelegate cellDidEndScrolling:self];
         }
-    }
-    else if (!_scrollingHasEnded) {
-        [self setNeedsLayout];
     }
 }
 
@@ -326,17 +326,13 @@ static NSMutableDictionary *_refs;
         return;
     }
     
-    if (_scrollingHasEnded) {
-        _scrollingHasEnded = NO;
-        
-        _optionViewVisible = (_scrollView.contentOffset.x != 0.0f);
-        
-        if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
-            [self.scrollDelegate cellDidEndScrolling:self];
-        }
-    }
-    else {
-        [self setNeedsLayout];
+    _scrolling = NO;
+    _scrollingHasEnded = NO;
+    
+    _optionViewVisible = (_scrollView.contentOffset.x != 0.0f);
+    
+    if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
+        [self.scrollDelegate cellDidEndScrolling:self];
     }
 }
 
