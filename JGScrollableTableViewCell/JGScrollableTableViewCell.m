@@ -192,7 +192,6 @@ static NSMutableDictionary *_refs;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.parentCell = self;
         _scrollView.delegate = self;
-        _scrollView.pagingEnabled = YES;
         _scrollView.scrollsToTop = NO;
         
         _scrollViewCoverView = [[UIView alloc] init];
@@ -284,21 +283,41 @@ static NSMutableDictionary *_refs;
     }
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (!decelerate) {
-        _scrolling = NO;
-        _optionViewVisible = (_side == JGScrollableTableViewCellSideRight ? (_scrollView.contentOffset.x != 0.0f) : (_scrollView.contentOffset.x == 0.0f));
-        
-        if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
-            [self.scrollDelegate cellDidEndScrolling:self];
-        }
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    CGFloat optionViewWidth = CGRectGetWidth(_optionView.frame);
+
+    // For ignoring the slow & gentle swipes
+    if (fabsf(velocity.x) < 0.5) {
+        targetContentOffset->x = _scrollView.contentOffset.x;
+    }
+    
+    if (_side == JGScrollableTableViewCellSideLeft) {
+        _optionViewVisible = (targetContentOffset->x < optionViewWidth/2);
+        targetContentOffset->x = (_optionViewVisible ? 0.0 : optionViewWidth);
+    }
+    else if (_side == JGScrollableTableViewCellSideRight) {
+        _optionViewVisible = (targetContentOffset->x > optionViewWidth/2);
+        targetContentOffset->x = (_optionViewVisible ? optionViewWidth : 0.0);
+    }
+    
+    if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
+        [self.scrollDelegate cellDidEndScrolling:self];
     }
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)__unused scrollView {
-    if (_scrolling) {
-        _scrolling = NO;
-        _optionViewVisible = (_side == JGScrollableTableViewCellSideRight ? (_scrollView.contentOffset.x != 0.0f) : (_scrollView.contentOffset.x == 0.0f));
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        CGFloat optionViewWidth = CGRectGetWidth(_optionView.frame);
+        
+        if (_side == JGScrollableTableViewCellSideLeft) {
+            _optionViewVisible = (_scrollView.contentOffset.x < optionViewWidth/2);
+            [self setOptionViewVisible:_optionViewVisible animated:YES];
+        }
+        else if (_side == JGScrollableTableViewCellSideRight) {
+            _optionViewVisible = (_scrollView.contentOffset.x > optionViewWidth/2);
+            [self setOptionViewVisible:_optionViewVisible animated:YES];
+        }
         
         if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
             [self.scrollDelegate cellDidEndScrolling:self];

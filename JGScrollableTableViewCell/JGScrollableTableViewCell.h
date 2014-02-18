@@ -46,6 +46,7 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
  */
 @property (nonatomic, strong) UIColor *scrollViewBackgroundColor;
 
+
 /**
  An instance conforming to the \c JGScrollableTableViewCellDelegate protocol.
  */
