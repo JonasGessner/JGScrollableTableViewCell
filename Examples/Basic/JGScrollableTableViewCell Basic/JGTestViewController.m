@@ -12,7 +12,7 @@
 
 #import "JGScrollableTableViewCellAccessoryButton.h"
 
-@interface JGTestViewController () <JGScrollableTableViewCellDelegate> {
+@interface JGTestViewController () <JGScrollableTableViewCellDelegate,IPQJGScrollableTableViewCellDelegate> {
     NSIndexPath *_openedIndexPath;
 }
 
@@ -27,9 +27,21 @@
         
         [self.tableView registerClass:[JGExampleScrollableTableViewCell class] forCellReuseIdentifier:@"ScrollCell"];
         
-        self.title = @"JGScrollableTableViewCell";
+        self.title = @"-> Slide to reveal side menu";
     }
     return self;
+}
+
+#pragma mark - IPQJGScrollableTableViewCellDelegate
+-(void)swipTableViewCellLeftButton:(JGScrollableTableViewCell*)swipeTableViewCell{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:swipeTableViewCell];
+    NSLog(@"indexpath = %d",indexPath.row);
+    NSLog(@"Left Button is pressed");
+}
+-(void)swipTableViewCellRightButton:(JGScrollableTableViewCell*)swipeTableViewCell{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:swipeTableViewCell];
+    NSLog(@"indexpath = %d",indexPath.row);
+    NSLog(@"Right Button is pressed");
 }
 
 #pragma mark - JGScrollableTableViewCellDelegate
@@ -75,6 +87,8 @@
     [cell setGrabberVisible:((indexPath.row % 3) == 0)];
     
     cell.scrollDelegate = self;
+    
+    cell.ipqDelegate = self;
     
     [cell setOptionViewVisible:[_openedIndexPath isEqual:indexPath]];
 
