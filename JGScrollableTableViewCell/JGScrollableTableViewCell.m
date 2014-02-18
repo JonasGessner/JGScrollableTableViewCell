@@ -456,6 +456,12 @@ static NSMutableDictionary *_refs;
     self.backgroundColor = scrollViewBackgroundColor;
 }
 
+- (void)setScrollViewBounces:(BOOL)scrollViewBounces
+{
+    _scrollViewBounces = scrollViewBounces;
+    _scrollView.bounces = scrollViewBounces;
+}
+
 - (void)setScrollViewInsets:(UIEdgeInsets)scrollViewInsets {
     _scrollViewInsets = scrollViewInsets;
     

@@ -48,6 +48,12 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
 
 
 /**
+ Sets the bouncing behaviour of the scroll area.
+ */
+@property (nonatomic, assign) BOOL scrollViewBounces;
+
+
+/**
  An instance conforming to the \c JGScrollableTableViewCellDelegate protocol.
  */
 @property (nonatomic, weak) id <JGScrollableTableViewCellDelegate> scrollDelegate;
