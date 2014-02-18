@@ -8,8 +8,16 @@
 
 #import "JGScrollableTableViewCell.h"
 
+@protocol IPQJGScrollableTableViewCellDelegate <NSObject>
+@optional
+-(void)swipTableViewCellLeftButton:(JGScrollableTableViewCell*)swipeTableViewCell;
+-(void)swipTableViewCellRightButton:(JGScrollableTableViewCell*)swipeTableViewCell;
+@end
+
 @interface JGExampleScrollableTableViewCell : JGScrollableTableViewCell
 
 - (void)setGrabberVisible:(BOOL)visible;
+
+@property (nonatomic, assign) id <IPQJGScrollableTableViewCellDelegate> ipqDelegate;
 
 @end
