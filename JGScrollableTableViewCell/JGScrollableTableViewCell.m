@@ -475,8 +475,7 @@ static NSMutableDictionary *_refs;
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     void (^actions)(BOOL select) = ^(BOOL select) {
-        _optionView.hidden = select;
-        _scrollView.scrollEnabled = !select;
+        _optionView.hidden = select || self.selected;
     };
     
     if (highlighted) {
@@ -498,8 +497,7 @@ static NSMutableDictionary *_refs;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     void (^actions)(BOOL select) = ^(BOOL select) {
-        _optionView.hidden = select;
-        _scrollView.scrollEnabled = !select;
+        _optionView.hidden = select || self.highlighted;
     };
     
     if (selected) {
