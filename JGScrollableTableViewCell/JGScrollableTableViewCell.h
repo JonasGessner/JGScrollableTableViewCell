@@ -52,6 +52,10 @@ typedef NS_ENUM(BOOL, JGScrollableTableViewCellSide) {
  */
 @property (nonatomic, assign) BOOL scrollViewBounces;
 
+/**
+ Sets the option for enabling scrolling when cell is highlighted.
+ */
+@property (nonatomic, assign) BOOL enableScrollWhenHighlighted;
 
 /**
  An instance conforming to the \c JGScrollableTableViewCellDelegate protocol.

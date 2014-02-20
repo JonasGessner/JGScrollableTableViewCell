@@ -193,6 +193,7 @@ static NSMutableDictionary *_refs;
         _scrollView.parentCell = self;
         _scrollView.delegate = self;
         _scrollView.scrollsToTop = NO;
+        _enableScrollWhenHighlighted = NO;
         
         _scrollViewCoverView = [[UIView alloc] init];
         [_scrollView addSubview:_scrollViewCoverView];
@@ -257,7 +258,9 @@ static NSMutableDictionary *_refs;
         if (!_optionViewVisible) {
             initial = YES;
         }
-        if (self.selected || self.highlighted || (self.grabberView && !self.optionViewVisible && !CGRectContainsPoint(self.grabberView.bounds, [_scrollView.panGestureRecognizer locationInView:self.grabberView]))) {
+        
+        if ((!_enableScrollWhenHighlighted && (self.selected || self.highlighted)) ||
+            (self.grabberView && !self.optionViewVisible && !CGRectContainsPoint(self.grabberView.bounds, [_scrollView.panGestureRecognizer locationInView:self.grabberView]))) {
             _scrollView.panGestureRecognizer.enabled = NO;
             _scrollView.panGestureRecognizer.enabled = YES;
             
@@ -300,10 +303,6 @@ static NSMutableDictionary *_refs;
         _optionViewVisible = (targetContentOffset->x > optionViewWidth/2);
         targetContentOffset->x = (_optionViewVisible ? optionViewWidth : 0.0);
     }
-    
-    if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
-        [self.scrollDelegate cellDidEndScrolling:self];
-    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -325,6 +324,11 @@ static NSMutableDictionary *_refs;
     }
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)__unused scrollView {
+    if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
+        [self.scrollDelegate cellDidEndScrolling:self];
+    }
+}
 
 #pragma mark - Overrides
 
