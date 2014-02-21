@@ -286,8 +286,7 @@ static NSMutableDictionary *_refs;
     }
 }
 
--(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
     CGFloat optionViewWidth = CGRectGetWidth(_optionView.frame);
 
     // For ignoring the slow & gentle swipes
@@ -318,6 +317,8 @@ static NSMutableDictionary *_refs;
             [self setOptionViewVisible:_optionViewVisible animated:YES];
         }
         
+        _scrolling = NO;
+        
         if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
             [self.scrollDelegate cellDidEndScrolling:self];
         }
@@ -325,6 +326,7 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)__unused scrollView {
+    _scrolling = NO;
     if ([self.scrollDelegate respondsToSelector:@selector(cellDidEndScrolling:)]) {
         [self.scrollDelegate cellDidEndScrolling:self];
     }
@@ -351,6 +353,10 @@ static NSMutableDictionary *_refs;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
+    if (self.scrolling) {
+        return;
+    }
     
     CGRect scrollViewFrame = UIEdgeInsetsInsetRect(self.contentBounds, self.scrollViewInsets);
     
