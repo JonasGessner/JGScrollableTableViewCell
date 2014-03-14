@@ -50,7 +50,7 @@
     UIView *hit = [super hitTest:point withEvent:event];
     if (hit == self) {
         if (CGRectContainsPoint(self.parentCell.optionView.frame, [self convertPoint:point toView:self.parentCell])) {
-            return self.parentCell.optionView;
+            return [self.parentCell.optionView hitTest:[self convertPoint:point toView:self.parentCell.optionView] withEvent:event];
         }
         else {
             return self;
