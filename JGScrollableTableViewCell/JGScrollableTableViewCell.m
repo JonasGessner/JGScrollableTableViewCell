@@ -33,18 +33,6 @@
 
 @implementation JGScrollableTableViewCellScrollView
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    if (otherGestureRecognizer.view == self.parentCell.parentTableView && (otherGestureRecognizer.state == UIGestureRecognizerStateBegan || otherGestureRecognizer.state == UIGestureRecognizerStateChanged)) {
-        return NO;
-    }
-    
-    if (self.parentCell.shouldRecognizeSimultaneouslyWithGestureRecognizerBlock) {
-        return self.parentCell.shouldRecognizeSimultaneouslyWithGestureRecognizerBlock(self.parentCell, otherGestureRecognizer, self);
-    }
-    else {
-        return YES;
-    }
-}
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     UIView *hit = [super hitTest:point withEvent:event];
@@ -357,9 +345,9 @@ static NSMutableDictionary *_refs;
 }
 
 - (void)layoutSubviews {
+    [super layoutSubviews];
+    
     if (!self.isScrolling) {
-        [super layoutSubviews];
-        
         CGRect scrollViewFrame = UIEdgeInsetsInsetRect(self.contentBounds, self.scrollViewInsets);
         
         _ignoreScrollEvents++;

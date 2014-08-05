@@ -105,11 +105,6 @@
  @property (nonatomic, copy) void (^scrollViewDidScrollBlock)(JGScrollableTableViewCell *cell, UIScrollView *scrollView);
 
 
-/**
- Custom handling of other gesture recognizers. The block should return whether the scroll view should scroll while another gesture recognizer is recognized.
- */
- @property (nonatomic, copy) BOOL (^shouldRecognizeSimultaneouslyWithGestureRecognizerBlock)(JGScrollableTableViewCell *cell, UIGestureRecognizer *otherGestureRecognizer, UIScrollView *scrollView);
-
 @end
 
 

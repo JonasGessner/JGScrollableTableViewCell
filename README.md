@@ -6,28 +6,42 @@
 JGScrollableTableViewCell is a simple and easy to use UITableViewCell subclass with a scrollable content view that exposes an accessory view when scrolled. The behavior is inspired by the iOS 7 mail app.
 <br>
 <br>
-<b>Current Version:<b> 1.0.3
+<b>Current Version:<b> 1.1
 <br>
 <br>
 <p align="center"><img src="Demo.gif"/></p>
 
-##Requirements
-
+Requirements
+=============
 • iOS 5 or higher<br>
 • Built with <b>ARC</b> (If your Xcode project doesn't use ARC then set the `-fobjc-arc` compiler flag)<br>
 • Foundation, UIKit and CoreGraphics frameworks<br>
 
 
-##Getting started
-
+Getting started
+=================
 `JGScrollableTableViewCell` works just like any other `UITableViewCell`: Highlighting, selection, and `UITableViewDelegate` calls all work like normal. The only difference is that the cell's `contentView` is covered by a `UIScrollView` that basically becomes the new content view – which is scrollable.
 
 An "option view" can be assigned to the cell, which is placed behind the scroll view, making it possible to scroll on the cell to reveal the option view behind it.
 
 <b>Note:</b> You should always use custom subclasses of `JGScrollableTableViewCell` that add your custom content to the cell (ex labels & image views).
 
-##Usage
 
+Installation
+================
+<b>CocoaPods:</b><br>
+Add this to your `Podfile`:
+```
+pod 'JGScrollableTableViewCell', '1.1'
+```
+
+<b>Add source files:</b><br>
+Drag the <a href="JGScrollableTableViewCell">JGScrollableTableViewCell folder</a> into your project.
+
+After you have included JGScrollableTableViewCell in your project, simply `#import "JGScrollableTableViewCell.h"` and you are ready to go!
+
+Documentation
+===============
 By default `JGScrollableTableViewCell` has an empty scroll area, and no option view. Here's a guide through the entire `JGScrollableTableViewCell` class:
 
 ####The scroll view
@@ -130,14 +144,6 @@ In some special cases custom touch handling may be needed (see `Advanced` exampl
 <br>
 <br>
 
-
-```objc
- @property (nonatomic, copy) BOOL (^shouldRecognizeSimultaneouslyWithGestureRecognizerBlock)(JGScrollableTableViewCell *cell, UIGestureRecognizer *otherGestureRecognizer, UIScrollView *scrollView);
-```
-This block allows custom handling of other gesture recognizers. The block should return whether the scroll view should scroll while another gesture recognizer is recognized.
-<br>
-<br>
-
 ##Advanced usage
 
 ####Management of opened option views
@@ -200,18 +206,18 @@ The `tableView:cellForRowAtIndexPath:` method should contain this code to update
 <br>
 <br>
 
-##Examples
-
+Examples
+===========
 There are two example projects located in the `Examples` folder.
 
-##Credits
+Credits
+==========
+Created by Jonas Gessner. ©2013-2014
 
-Created by Jonas Gessner.
-
-##Contribution
-
+Contribution
+===============
 You are welcome to contribute to the project by forking the repo, modifying the code and opening issues or pull requests.
 
-##License
-
+License
+============
 Licensed under the MIT license.
